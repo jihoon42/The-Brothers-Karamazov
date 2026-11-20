@@ -1,0 +1,13 @@
+# 카라마조프 네트워크 분석에 쓴 패키지. results/ 를 만든 환경(2026-11-20)의 버전 그대로다.
+# Python 3.10, 3.12, 3.13 에서 설치된다. 환경을 만드는 순서는 docs/01-progress.md 12절에 있다.
+pandas==2.3.3
+numpy==2.2.6
+networkx==3.4.2        # louvain_communities, kamada_kawai_layout
+scipy==1.15.3          # networkx 의 pagerank 와 kamada_kawai_layout 이 쓴다
+scikit-learn==1.7.2    # 분할끼리의 일치도(NMI)
+spacy==3.8.18
+nltk==3.10.4           # 자료는 따로 받는다: python -m nltk.downloader punkt_tab stopwords
+matplotlib==3.10.9     # 정지 그림
+pyvis==0.3.2           # 수업 코드 기준선(03번)에만 필요
+# spaCy 영어 모델. 버전까지 고정하려고 여기에 적는다 (python -m spacy download 를 따로 돌릴 필요가 없다)
+en_core_web_sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl

@@ -1,0 +1,370 @@
+{
+ "sentences": 24342,
+ "candidates": 1080,
+ "nodes": 57,
+ "edges": 154,
+ "seconds": 25.1,
+ "top_degree": [
+  [
+   "Mitya",
+   0.375
+  ],
+  [
+   "Alyosha",
+   0.3571
+  ],
+  [
+   "Dmitri",
+   0.3214
+  ],
+  [
+   "You",
+   0.3036
+  ],
+  [
+   "Fyodor",
+   0.3036
+  ],
+  [
+   "Ivan",
+   0.25
+  ],
+  [
+   "Smerdyakov",
+   0.1964
+  ],
+  [
+   "Father",
+   0.1964
+  ],
+  [
+   "Katerina",
+   0.1607
+  ],
+  [
+   "Grushenka",
+   0.1607
+  ],
+  [
+   "Pavlovitch",
+   0.1607
+  ],
+  [
+   "God",
+   0.1607
+  ],
+  [
+   "Fyodorovitch",
+   0.125
+  ],
+  [
+   "Alexey",
+   0.125
+  ],
+  [
+   "Madame",
+   0.1071
+  ],
+  [
+   "Karamazov",
+   0.1071
+  ],
+  [
+   "Grigory",
+   0.1071
+  ],
+  [
+   "Nikolay",
+   0.1071
+  ],
+  [
+   "Ivanovna",
+   0.1071
+  ],
+  [
+   "Parfenovitch",
+   0.1071
+  ],
+  [
+   "Thy",
+   0.1071
+  ],
+  [
+   "They",
+   0.1071
+  ],
+  [
+   "Thou",
+   0.0893
+  ],
+  [
+   "Marya",
+   0.0714
+  ],
+  [
+   "Kolya",
+   0.0714
+  ],
+  [
+   "Ilusha",
+   0.0714
+  ],
+  [
+   "Marfa",
+   0.0714
+  ],
+  [
+   "Pyotr",
+   0.0536
+  ],
+  [
+   "Agrafena",
+   0.0536
+  ],
+  [
+   "Hohlakov",
+   0.0536
+  ]
+ ],
+ "top_weighted_degree": [
+  [
+   "Fyodor",
+   262
+  ],
+  [
+   "Pavlovitch",
+   202
+  ],
+  [
+   "Alyosha",
+   191
+  ],
+  [
+   "Dmitri",
+   180
+  ],
+  [
+   "Katerina",
+   167
+  ],
+  [
+   "Ivan",
+   145
+  ],
+  [
+   "Father",
+   143
+  ],
+  [
+   "Fyodorovitch",
+   143
+  ],
+  [
+   "Ivanovna",
+   120
+  ],
+  [
+   "Mitya",
+   116
+  ],
+  [
+   "You",
+   109
+  ],
+  [
+   "Thou",
+   106
+  ],
+  [
+   "Nikolay",
+   82
+  ],
+  [
+   "Madame",
+   79
+  ],
+  [
+   "Parfenovitch",
+   74
+  ],
+  [
+   "Smerdyakov",
+   71
+  ],
+  [
+   "Thy",
+   64
+  ],
+  [
+   "Hohlakov",
+   58
+  ],
+  [
+   "Zossima",
+   56
+  ],
+  [
+   "God",
+   55
+  ],
+  [
+   "Alexey",
+   52
+  ],
+  [
+   "Grushenka",
+   47
+  ],
+  [
+   "Grigory",
+   44
+  ],
+  [
+   "Marfa",
+   41
+  ],
+  [
+   "Thee",
+   38
+  ],
+  [
+   "Karamazov",
+   34
+  ],
+  [
+   "Agrafena",
+   32
+  ],
+  [
+   "Ferapont",
+   29
+  ],
+  [
+   "Alexandrovna",
+   28
+  ],
+  [
+   "They",
+   27
+  ]
+ ],
+ "nodes_all": [
+  "Adelaïda",
+  "Agrafena",
+  "Alexandrovna",
+  "Alexey",
+  "Alyosha",
+  "Anfim",
+  "Borissovitch",
+  "Dmitri",
+  "Father",
+  "Ferapont",
+  "Fyodor",
+  "Fyodorovitch",
+  "Glory",
+  "God",
+  "Grigory",
+  "Grushenka",
+  "Hohlakov",
+  "Ignatyevna",
+  "Ilusha",
+  "Iosif",
+  "Ivan",
+  "Ivanovna",
+  "Karamazov",
+  "Katerina",
+  "Kolya",
+  "Kondratyevna",
+  "Krassotkin",
+  "Kuzma",
+  "Kuzmitch",
+  "Lise",
+  "Lord",
+  "Madame",
+  "Marfa",
+  "Marya",
+  "Mihail",
+  "Mitya",
+  "Miüsov",
+  "Moscow",
+  "Nikolay",
+  "Pan",
+  "Parfenovitch",
+  "Pavlovitch",
+  "President",
+  "Pyotr",
+  "Rakitin",
+  "Smerdyakov",
+  "Smurov",
+  "Son",
+  "Superior",
+  "Thee",
+  "They",
+  "Thou",
+  "Thy",
+  "Thyself",
+  "Trifon",
+  "You",
+  "Zossima"
+ ],
+ "mention_counts": {
+  "Dmitri": 295,
+  "President": 43,
+  "Madame": 113,
+  "Ferapont": 23,
+  "Pan": 28,
+  "Smerdyakov": 207,
+  "Alexey": 125,
+  "Pyotr": 132,
+  "Kolya": 138,
+  "You": 771,
+  "Mihail": 24,
+  "Adelaïda": 14,
+  "Smurov": 27,
+  "God": 208,
+  "Son": 5,
+  "Agrafena": 39,
+  "Pavlovitch": 161,
+  "Thy": 49,
+  "Trifon": 43,
+  "Alexandrovna": 24,
+  "Miüsov": 46,
+  "Kuzma": 27,
+  "Lise": 50,
+  "Father": 276,
+  "Thou": 132,
+  "Superior": 15,
+  "Marya": 32,
+  "Anfim": 2,
+  "Hohlakov": 49,
+  "Alyosha": 658,
+  "Moscow": 50,
+  "Ignatyevna": 22,
+  "Lord": 28,
+  "Zossima": 49,
+  "Thyself": 6,
+  "Krassotkin": 39,
+  "Iosif": 7,
+  "Fyodorovitch": 113,
+  "Kuzmitch": 3,
+  "Borissovitch": 12,
+  "Karamazov": 66,
+  "Ilusha": 67,
+  "Kondratyevna": 12,
+  "Rakitin": 88,
+  "Katerina": 203,
+  "They": 290,
+  "Fyodor": 300,
+  "Ivan": 468,
+  "Grigory": 130,
+  "Glory": 4,
+  "Grushenka": 210,
+  "Marfa": 45,
+  "Nikolay": 107,
+  "Ivanovna": 95,
+  "Mitya": 517,
+  "Parfenovitch": 55,
+  "Thee": 36
+ },
+ "hash_seed": "0"
+}

@@ -1,0 +1,1624 @@
+{
+ "text": {
+  "paragraphs": 5830,
+  "sentences": 24600,
+  "words": 349323,
+  "chapters": 96
+ },
+ "characters": 70,
+ "mentions": 8522,
+ "mentions_by_layer": {
+  "name": 7619,
+  "role": 903
+ },
+ "min_weight": 2,
+ "main_unit": "paragraph",
+ "units": {
+  "sentence": {
+   "pairs_any": 292,
+   "units_with_two_or_more": 1231,
+   "nodes": 55,
+   "edges": 176,
+   "giant_nodes": 53,
+   "density": 0.127,
+   "avg_clustering": 0.5556,
+   "modularity": 0.2957,
+   "community_stability": {
+    "n_runs": 20,
+    "modularity_min": 0.29104628254772374,
+    "modularity_max": 0.29572519676633574,
+    "nmi_to_best_mean": 0.9563700758252445,
+    "nmi_to_best_min": 0.8726755784551001,
+    "n_communities": [
+     [
+      4,
+      16
+     ],
+     [
+      5,
+      4
+     ]
+    ]
+   },
+   "communities": [
+    {
+     "index": 0,
+     "label": "Dmitri (Mitya)",
+     "size": 18,
+     "members": [
+      "mitya",
+      "grushenka",
+      "ippolit",
+      "samsonov",
+      "mussyalovitch",
+      "nelyudov",
+      "vrublevsky",
+      "perhotin",
+      "makarov",
+      "kalganov",
+      "fetyukovitch",
+      "maximov",
+      "fenya",
+      "president",
+      "trifon",
+      "misha_boy",
+      "andrey",
+      "lyagavy"
+     ]
+    },
+    {
+     "index": 1,
+     "label": "Alyosha",
+     "size": 17,
+     "members": [
+      "alyosha",
+      "ivan",
+      "katerina",
+      "zossima",
+      "rakitin",
+      "hohlakov",
+      "lise",
+      "miusov",
+      "paissy",
+      "superior",
+      "ferapont",
+      "iosif",
+      "porfiry",
+      "yulia",
+      "christ",
+      "obdorsk",
+      "yefim"
+     ]
+    },
+    {
+     "index": 2,
+     "label": "Smerdyakov",
+     "size": 9,
+     "members": [
+      "smerdyakov",
+      "fyodor",
+      "grigory",
+      "marfa",
+      "marya_k",
+      "herzenstube",
+      "adelaida",
+      "varvinsky",
+      "sofya"
+     ]
+    },
+    {
+     "index": 3,
+     "label": "Kolya Krassotkin",
+     "size": 9,
+     "members": [
+      "kolya",
+      "ilusha",
+      "snegiryov",
+      "smurov",
+      "perezvon",
+      "moscow_doctor",
+      "dardanelov",
+      "kartashov",
+      "nina"
+     ]
+    }
+   ],
+   "top_edges": [
+    [
+     "alyosha",
+     "ivan",
+     79
+    ],
+    [
+     "grushenka",
+     "mitya",
+     67
+    ],
+    [
+     "ivan",
+     "mitya",
+     58
+    ],
+    [
+     "alyosha",
+     "mitya",
+     58
+    ],
+    [
+     "ivan",
+     "smerdyakov",
+     51
+    ],
+    [
+     "ippolit",
+     "mitya",
+     43
+    ],
+    [
+     "alyosha",
+     "katerina",
+     41
+    ],
+    [
+     "mitya",
+     "smerdyakov",
+     37
+    ],
+    [
+     "fyodor",
+     "mitya",
+     31
+    ],
+    [
+     "alyosha",
+     "zossima",
+     31
+    ],
+    [
+     "katerina",
+     "mitya",
+     31
+    ],
+    [
+     "alyosha",
+     "grushenka",
+     30
+    ],
+    [
+     "alyosha",
+     "rakitin",
+     29
+    ],
+    [
+     "alyosha",
+     "kolya",
+     29
+    ],
+    [
+     "mussyalovitch",
+     "vrublevsky",
+     28
+    ],
+    [
+     "alyosha",
+     "lise",
+     28
+    ],
+    [
+     "ivan",
+     "katerina",
+     26
+    ],
+    [
+     "ilusha",
+     "kolya",
+     25
+    ],
+    [
+     "fyodor",
+     "grigory",
+     22
+    ],
+    [
+     "mitya",
+     "samsonov",
+     22
+    ],
+    [
+     "fyodor",
+     "ivan",
+     21
+    ],
+    [
+     "mitya",
+     "nelyudov",
+     21
+    ],
+    [
+     "mitya",
+     "perhotin",
+     20
+    ],
+    [
+     "grigory",
+     "marfa",
+     19
+    ],
+    [
+     "alyosha",
+     "hohlakov",
+     18
+    ]
+   ],
+   "top": {
+    "degree": [
+     [
+      "mitya",
+      32.0
+     ],
+     [
+      "alyosha",
+      26.0
+     ],
+     [
+      "ivan",
+      19.0
+     ],
+     [
+      "fyodor",
+      18.0
+     ],
+     [
+      "grushenka",
+      17.0
+     ],
+     [
+      "ippolit",
+      15.0
+     ],
+     [
+      "zossima",
+      12.0
+     ],
+     [
+      "smerdyakov",
+      12.0
+     ],
+     [
+      "katerina",
+      10.0
+     ],
+     [
+      "rakitin",
+      10.0
+     ],
+     [
+      "hohlakov",
+      10.0
+     ],
+     [
+      "kolya",
+      8.0
+     ],
+     [
+      "kalganov",
+      8.0
+     ],
+     [
+      "grigory",
+      8.0
+     ],
+     [
+      "perhotin",
+      8.0
+     ]
+    ],
+    "strength": [
+     [
+      "mitya",
+      540.0
+     ],
+     [
+      "alyosha",
+      434.0
+     ],
+     [
+      "ivan",
+      286.0
+     ],
+     [
+      "grushenka",
+      190.0
+     ],
+     [
+      "smerdyakov",
+      170.0
+     ],
+     [
+      "fyodor",
+      164.0
+     ],
+     [
+      "katerina",
+      127.0
+     ],
+     [
+      "ippolit",
+      114.0
+     ],
+     [
+      "kolya",
+      96.0
+     ],
+     [
+      "grigory",
+      88.0
+     ],
+     [
+      "zossima",
+      76.0
+     ],
+     [
+      "ilusha",
+      63.0
+     ],
+     [
+      "rakitin",
+      63.0
+     ],
+     [
+      "samsonov",
+      48.0
+     ],
+     [
+      "hohlakov",
+      47.0
+     ]
+    ],
+    "pagerank": [
+     [
+      "mitya",
+      0.14
+     ],
+     [
+      "alyosha",
+      0.1208
+     ],
+     [
+      "ivan",
+      0.071
+     ],
+     [
+      "grushenka",
+      0.048
+     ],
+     [
+      "fyodor",
+      0.0452
+     ],
+     [
+      "smerdyakov",
+      0.0426
+     ],
+     [
+      "kolya",
+      0.0387
+     ],
+     [
+      "katerina",
+      0.0319
+     ],
+     [
+      "ippolit",
+      0.0301
+     ],
+     [
+      "zossima",
+      0.0286
+     ],
+     [
+      "ilusha",
+      0.0259
+     ],
+     [
+      "grigory",
+      0.024
+     ],
+     [
+      "rakitin",
+      0.0183
+     ],
+     [
+      "lise",
+      0.0147
+     ],
+     [
+      "mussyalovitch",
+      0.0147
+     ]
+    ],
+    "betweenness": [
+     [
+      "mitya",
+      0.6357
+     ],
+     [
+      "alyosha",
+      0.6116
+     ],
+     [
+      "kolya",
+      0.2157
+     ],
+     [
+      "ivan",
+      0.1207
+     ],
+     [
+      "zossima",
+      0.1109
+     ],
+     [
+      "fyodor",
+      0.1048
+     ],
+     [
+      "ippolit",
+      0.0739
+     ],
+     [
+      "ilusha",
+      0.046
+     ],
+     [
+      "lise",
+      0.0385
+     ],
+     [
+      "ferapont",
+      0.0385
+     ],
+     [
+      "miusov",
+      0.0385
+     ],
+     [
+      "grigory",
+      0.0385
+     ],
+     [
+      "paissy",
+      0.0385
+     ],
+     [
+      "smerdyakov",
+      0.0385
+     ],
+     [
+      "snegiryov",
+      0.037
+     ]
+    ]
+   }
+  },
+  "paragraph": {
+   "pairs_any": 532,
+   "units_with_two_or_more": 1587,
+   "nodes": 64,
+   "edges": 343,
+   "giant_nodes": 64,
+   "density": 0.1701,
+   "avg_clustering": 0.7196,
+   "modularity": 0.2595,
+   "community_stability": {
+    "n_runs": 20,
+    "modularity_min": 0.25727270965366206,
+    "modularity_max": 0.25946478701057457,
+    "nmi_to_best_mean": 0.9889500748635713,
+    "nmi_to_best_min": 0.8950257112039292,
+    "n_communities": [
+     [
+      4,
+      20
+     ]
+    ]
+   },
+   "communities": [
+    {
+     "index": 0,
+     "label": "Alyosha",
+     "size": 22,
+     "members": [
+      "alyosha",
+      "ivan",
+      "katerina",
+      "rakitin",
+      "zossima",
+      "hohlakov",
+      "lise",
+      "miusov",
+      "paissy",
+      "superior",
+      "herzenstube",
+      "christ",
+      "varvinsky",
+      "iosif",
+      "ferapont",
+      "yulia",
+      "porfiry",
+      "inquisitor",
+      "obdorsk",
+      "agafya_i",
+      "devil",
+      "yefim"
+     ]
+    },
+    {
+     "index": 1,
+     "label": "Dmitri (Mitya)",
+     "size": 20,
+     "members": [
+      "mitya",
+      "grushenka",
+      "ippolit",
+      "nelyudov",
+      "perhotin",
+      "samsonov",
+      "makarov",
+      "fetyukovitch",
+      "kalganov",
+      "maximov",
+      "fenya",
+      "mussyalovitch",
+      "vrublevsky",
+      "president",
+      "trifon",
+      "andrey",
+      "lyagavy",
+      "mavriky",
+      "misha_boy",
+      "timofey"
+     ]
+    },
+    {
+     "index": 2,
+     "label": "Kolya Krassotkin",
+     "size": 14,
+     "members": [
+      "kolya",
+      "ilusha",
+      "snegiryov",
+      "perezvon",
+      "moscow_doctor",
+      "smurov",
+      "nina",
+      "agafya_s",
+      "varvara",
+      "kostya",
+      "kartashov",
+      "dardanelov",
+      "kolya_mother",
+      "nastya"
+     ]
+    },
+    {
+     "index": 3,
+     "label": "Fyodor Pavlovitch",
+     "size": 8,
+     "members": [
+      "fyodor",
+      "smerdyakov",
+      "grigory",
+      "marfa",
+      "marya_k",
+      "adelaida",
+      "sofya",
+      "lizaveta"
+     ]
+    }
+   ],
+   "top_edges": [
+    [
+     "alyosha",
+     "mitya",
+     158
+    ],
+    [
+     "grushenka",
+     "mitya",
+     154
+    ],
+    [
+     "alyosha",
+     "ivan",
+     149
+    ],
+    [
+     "ivan",
+     "mitya",
+     95
+    ],
+    [
+     "ivan",
+     "smerdyakov",
+     94
+    ],
+    [
+     "alyosha",
+     "katerina",
+     90
+    ],
+    [
+     "fyodor",
+     "mitya",
+     86
+    ],
+    [
+     "ippolit",
+     "mitya",
+     78
+    ],
+    [
+     "alyosha",
+     "grushenka",
+     75
+    ],
+    [
+     "alyosha",
+     "rakitin",
+     73
+    ],
+    [
+     "katerina",
+     "mitya",
+     68
+    ],
+    [
+     "alyosha",
+     "lise",
+     64
+    ],
+    [
+     "mitya",
+     "smerdyakov",
+     62
+    ],
+    [
+     "alyosha",
+     "zossima",
+     56
+    ],
+    [
+     "fyodor",
+     "smerdyakov",
+     52
+    ],
+    [
+     "alyosha",
+     "kolya",
+     51
+    ],
+    [
+     "mitya",
+     "nelyudov",
+     48
+    ],
+    [
+     "fyodor",
+     "ivan",
+     46
+    ],
+    [
+     "ivan",
+     "katerina",
+     46
+    ],
+    [
+     "grigory",
+     "mitya",
+     45
+    ],
+    [
+     "fyodor",
+     "grigory",
+     44
+    ],
+    [
+     "alyosha",
+     "fyodor",
+     44
+    ],
+    [
+     "mitya",
+     "perhotin",
+     43
+    ],
+    [
+     "ilusha",
+     "kolya",
+     42
+    ],
+    [
+     "grigory",
+     "smerdyakov",
+     38
+    ]
+   ],
+   "top": {
+    "degree": [
+     [
+      "alyosha",
+      47.0
+     ],
+     [
+      "mitya",
+      42.0
+     ],
+     [
+      "ivan",
+      35.0
+     ],
+     [
+      "fyodor",
+      31.0
+     ],
+     [
+      "grushenka",
+      24.0
+     ],
+     [
+      "katerina",
+      23.0
+     ],
+     [
+      "ippolit",
+      22.0
+     ],
+     [
+      "rakitin",
+      21.0
+     ],
+     [
+      "hohlakov",
+      19.0
+     ],
+     [
+      "makarov",
+      18.0
+     ],
+     [
+      "grigory",
+      18.0
+     ],
+     [
+      "zossima",
+      18.0
+     ],
+     [
+      "smerdyakov",
+      17.0
+     ],
+     [
+      "perhotin",
+      15.0
+     ],
+     [
+      "kalganov",
+      15.0
+     ]
+    ],
+    "strength": [
+     [
+      "mitya",
+      1241.0
+     ],
+     [
+      "alyosha",
+      1069.0
+     ],
+     [
+      "ivan",
+      627.0
+     ],
+     [
+      "grushenka",
+      507.0
+     ],
+     [
+      "fyodor",
+      472.0
+     ],
+     [
+      "smerdyakov",
+      379.0
+     ],
+     [
+      "katerina",
+      337.0
+     ],
+     [
+      "ippolit",
+      262.0
+     ],
+     [
+      "grigory",
+      235.0
+     ],
+     [
+      "rakitin",
+      200.0
+     ],
+     [
+      "zossima",
+      192.0
+     ],
+     [
+      "kolya",
+      192.0
+     ],
+     [
+      "ilusha",
+      153.0
+     ],
+     [
+      "hohlakov",
+      148.0
+     ],
+     [
+      "nelyudov",
+      131.0
+     ]
+    ],
+    "pagerank": [
+     [
+      "mitya",
+      0.1247
+     ],
+     [
+      "alyosha",
+      0.1165
+     ],
+     [
+      "ivan",
+      0.0636
+     ],
+     [
+      "grushenka",
+      0.0488
+     ],
+     [
+      "fyodor",
+      0.0474
+     ],
+     [
+      "smerdyakov",
+      0.0366
+     ],
+     [
+      "kolya",
+      0.0359
+     ],
+     [
+      "katerina",
+      0.0351
+     ],
+     [
+      "ippolit",
+      0.0266
+     ],
+     [
+      "grigory",
+      0.0251
+     ],
+     [
+      "zossima",
+      0.025
+     ],
+     [
+      "ilusha",
+      0.0236
+     ],
+     [
+      "rakitin",
+      0.0211
+     ],
+     [
+      "snegiryov",
+      0.0176
+     ],
+     [
+      "hohlakov",
+      0.0166
+     ]
+    ],
+    "betweenness": [
+     [
+      "alyosha",
+      0.65
+     ],
+     [
+      "mitya",
+      0.6334
+     ],
+     [
+      "kolya",
+      0.2642
+     ],
+     [
+      "zossima",
+      0.1086
+     ],
+     [
+      "ivan",
+      0.0771
+     ],
+     [
+      "fyodor",
+      0.0763
+     ],
+     [
+      "grigory",
+      0.0599
+     ],
+     [
+      "smerdyakov",
+      0.0338
+     ],
+     [
+      "katerina",
+      0.0317
+     ],
+     [
+      "perhotin",
+      0.0317
+     ],
+     [
+      "perezvon",
+      0.0312
+     ],
+     [
+      "paissy",
+      0.0143
+     ],
+     [
+      "ferapont",
+      0.0
+     ],
+     [
+      "iosif",
+      0.0
+     ],
+     [
+      "adelaida",
+      0.0
+     ]
+    ]
+   }
+  },
+  "chapter": {
+   "pairs_any": 650,
+   "units_with_two_or_more": 96,
+   "nodes": 57,
+   "edges": 391,
+   "giant_nodes": 57,
+   "density": 0.245,
+   "avg_clustering": 0.7676,
+   "modularity": 0.1944,
+   "community_stability": {
+    "n_runs": 20,
+    "modularity_min": 0.18923141469996496,
+    "modularity_max": 0.19440041357427992,
+    "nmi_to_best_mean": 0.9763660757537937,
+    "nmi_to_best_min": 0.8059578076408718,
+    "n_communities": [
+     [
+      4,
+      20
+     ]
+    ]
+   },
+   "communities": [
+    {
+     "index": 0,
+     "label": "Alyosha",
+     "size": 20,
+     "members": [
+      "alyosha",
+      "ivan",
+      "katerina",
+      "zossima",
+      "rakitin",
+      "hohlakov",
+      "paissy",
+      "christ",
+      "miusov",
+      "superior",
+      "iosif",
+      "lise",
+      "herzenstube",
+      "agafya_i",
+      "yulia",
+      "ferapont",
+      "obdorsk",
+      "varvinsky",
+      "inquisitor",
+      "yefim"
+     ]
+    },
+    {
+     "index": 1,
+     "label": "Dmitri (Mitya)",
+     "size": 18,
+     "members": [
+      "mitya",
+      "fyodor",
+      "grushenka",
+      "smerdyakov",
+      "grigory",
+      "ippolit",
+      "marfa",
+      "nelyudov",
+      "fetyukovitch",
+      "fenya",
+      "perhotin",
+      "samsonov",
+      "president",
+      "marya_k",
+      "lyagavy",
+      "adelaida",
+      "timofey",
+      "lizaveta"
+     ]
+    },
+    {
+     "index": 2,
+     "label": "Ilusha",
+     "size": 11,
+     "members": [
+      "ilusha",
+      "kolya",
+      "snegiryov",
+      "smurov",
+      "nina",
+      "perezvon",
+      "moscow_doctor",
+      "kartashov",
+      "varvara",
+      "dardanelov",
+      "kolya_mother"
+     ]
+    },
+    {
+     "index": 3,
+     "label": "Maximov",
+     "size": 8,
+     "members": [
+      "maximov",
+      "trifon",
+      "kalganov",
+      "makarov",
+      "mussyalovitch",
+      "vrublevsky",
+      "andrey",
+      "mavriky"
+     ]
+    }
+   ],
+   "top_edges": [
+    [
+     "alyosha",
+     "mitya",
+     44
+    ],
+    [
+     "fyodor",
+     "mitya",
+     39
+    ],
+    [
+     "alyosha",
+     "ivan",
+     39
+    ],
+    [
+     "grushenka",
+     "mitya",
+     38
+    ],
+    [
+     "ivan",
+     "mitya",
+     36
+    ],
+    [
+     "katerina",
+     "mitya",
+     32
+    ],
+    [
+     "alyosha",
+     "katerina",
+     32
+    ],
+    [
+     "alyosha",
+     "fyodor",
+     27
+    ],
+    [
+     "fyodor",
+     "ivan",
+     25
+    ],
+    [
+     "mitya",
+     "smerdyakov",
+     25
+    ],
+    [
+     "fyodor",
+     "smerdyakov",
+     24
+    ],
+    [
+     "alyosha",
+     "grushenka",
+     23
+    ],
+    [
+     "ivan",
+     "katerina",
+     23
+    ],
+    [
+     "fyodor",
+     "grushenka",
+     23
+    ],
+    [
+     "ippolit",
+     "mitya",
+     22
+    ],
+    [
+     "grigory",
+     "mitya",
+     22
+    ],
+    [
+     "alyosha",
+     "zossima",
+     21
+    ],
+    [
+     "ivan",
+     "smerdyakov",
+     20
+    ],
+    [
+     "fyodor",
+     "grigory",
+     20
+    ],
+    [
+     "alyosha",
+     "smerdyakov",
+     19
+    ],
+    [
+     "grushenka",
+     "ivan",
+     18
+    ],
+    [
+     "grushenka",
+     "katerina",
+     18
+    ],
+    [
+     "grushenka",
+     "smerdyakov",
+     17
+    ],
+    [
+     "grigory",
+     "smerdyakov",
+     17
+    ],
+    [
+     "alyosha",
+     "rakitin",
+     16
+    ]
+   ],
+   "top": {
+    "degree": [
+     [
+      "alyosha",
+      49.0
+     ],
+     [
+      "mitya",
+      43.0
+     ],
+     [
+      "katerina",
+      38.0
+     ],
+     [
+      "fyodor",
+      37.0
+     ],
+     [
+      "grushenka",
+      31.0
+     ],
+     [
+      "ivan",
+      29.0
+     ],
+     [
+      "grigory",
+      26.0
+     ],
+     [
+      "rakitin",
+      24.0
+     ],
+     [
+      "ippolit",
+      23.0
+     ],
+     [
+      "zossima",
+      22.0
+     ],
+     [
+      "smerdyakov",
+      20.0
+     ],
+     [
+      "maximov",
+      20.0
+     ],
+     [
+      "hohlakov",
+      19.0
+     ],
+     [
+      "fenya",
+      17.0
+     ],
+     [
+      "trifon",
+      16.0
+     ]
+    ],
+    "strength": [
+     [
+      "mitya",
+      450.0
+     ],
+     [
+      "alyosha",
+      401.0
+     ],
+     [
+      "fyodor",
+      299.0
+     ],
+     [
+      "ivan",
+      269.0
+     ],
+     [
+      "grushenka",
+      269.0
+     ],
+     [
+      "katerina",
+      244.0
+     ],
+     [
+      "smerdyakov",
+      192.0
+     ],
+     [
+      "grigory",
+      176.0
+     ],
+     [
+      "ippolit",
+      154.0
+     ],
+     [
+      "zossima",
+      132.0
+     ],
+     [
+      "rakitin",
+      113.0
+     ],
+     [
+      "hohlakov",
+      75.0
+     ],
+     [
+      "marfa",
+      73.0
+     ],
+     [
+      "maximov",
+      67.0
+     ],
+     [
+      "paissy",
+      63.0
+     ]
+    ],
+    "pagerank": [
+     [
+      "mitya",
+      0.0912
+     ],
+     [
+      "alyosha",
+      0.0877
+     ],
+     [
+      "fyodor",
+      0.0604
+     ],
+     [
+      "ivan",
+      0.0542
+     ],
+     [
+      "grushenka",
+      0.0537
+     ],
+     [
+      "katerina",
+      0.0526
+     ],
+     [
+      "smerdyakov",
+      0.0373
+     ],
+     [
+      "grigory",
+      0.0361
+     ],
+     [
+      "ippolit",
+      0.0309
+     ],
+     [
+      "zossima",
+      0.029
+     ],
+     [
+      "rakitin",
+      0.0247
+     ],
+     [
+      "kolya",
+      0.0208
+     ],
+     [
+      "hohlakov",
+      0.017
+     ],
+     [
+      "ilusha",
+      0.0166
+     ],
+     [
+      "marfa",
+      0.0163
+     ]
+    ],
+    "betweenness": [
+     [
+      "mitya",
+      0.6041
+     ],
+     [
+      "alyosha",
+      0.5492
+     ],
+     [
+      "kolya",
+      0.0731
+     ],
+     [
+      "fyodor",
+      0.0431
+     ],
+     [
+      "zossima",
+      0.0387
+     ],
+     [
+      "katerina",
+      0.0381
+     ],
+     [
+      "ivan",
+      0.0034
+     ],
+     [
+      "grushenka",
+      0.0026
+     ],
+     [
+      "grigory",
+      0.0006
+     ],
+     [
+      "ilusha",
+      0.0005
+     ],
+     [
+      "paissy",
+      0.0004
+     ],
+     [
+      "snegiryov",
+      0.0002
+     ],
+     [
+      "mussyalovitch",
+      0.0
+     ],
+     [
+      "superior",
+      0.0
+     ],
+     [
+      "andrey",
+      0.0
+     ]
+    ]
+   }
+  }
+ },
+ "unit_comparison": {
+  "sentence_vs_paragraph": {
+   "common_nodes": 53,
+   "spearman": {
+    "degree": 0.923,
+    "strength": 0.956,
+    "pagerank": 0.936,
+    "betweenness": 0.643
+   },
+   "edge_jaccard": 0.51,
+   "community_nmi": 0.92
+  },
+  "sentence_vs_chapter": {
+   "common_nodes": 50,
+   "spearman": {
+    "degree": 0.751,
+    "strength": 0.821,
+    "pagerank": 0.815,
+    "betweenness": 0.694
+   },
+   "edge_jaccard": 0.404,
+   "community_nmi": 0.752
+  },
+  "paragraph_vs_chapter": {
+   "common_nodes": 57,
+   "spearman": {
+    "degree": 0.867,
+    "strength": 0.898,
+    "pagerank": 0.911,
+    "betweenness": 0.753
+   },
+   "edge_jaccard": 0.627,
+   "community_nmi": 0.834
+  }
+ },
+ "class_style": {
+  "largest_clique": [
+   "mitya",
+   "alyosha",
+   "ivan",
+   "grushenka",
+   "fyodor",
+   "katerina",
+   "ippolit",
+   "rakitin",
+   "hohlakov",
+   "perhotin",
+   "makarov"
+  ],
+  "largest_clique_size": 11,
+  "n_largest_cliques": 1,
+  "hits_authority_top": [
+   [
+    "mitya",
+    0.1238
+   ],
+   [
+    "alyosha",
+    0.1149
+   ],
+   [
+    "ivan",
+    0.089
+   ],
+   [
+    "grushenka",
+    0.0763
+   ],
+   [
+    "fyodor",
+    0.0597
+   ],
+   [
+    "katerina",
+    0.0559
+   ],
+   [
+    "smerdyakov",
+    0.055
+   ],
+   [
+    "ippolit",
+    0.0342
+   ]
+  ],
+  "path_perezvon_to_inquisitor": [
+   "perezvon",
+   "kolya",
+   "alyosha",
+   "ivan",
+   "inquisitor"
+  ]
+ },
+ "baseline_class": {
+  "candidates": 1080,
+  "nodes": 57,
+  "edges": 154,
+  "sentences": 24342,
+  "nodes_that_are_name_parts": 47,
+  "nodes_not_persons": [
+   "Glory",
+   "God",
+   "Lord",
+   "Son",
+   "Thee",
+   "They",
+   "Thou",
+   "Thy",
+   "Thyself",
+   "You"
+  ],
+  "persons_split_into_several_nodes": {
+   "adelaida": 3,
+   "grushenka": 4,
+   "alyosha": 4,
+   "anfim": 2,
+   "trifon": 2,
+   "mitya": 4,
+   "ferapont": 2,
+   "iosif": 2,
+   "superior": 2,
+   "zossima": 2,
+   "fyodor": 3,
+   "ivan": 3,
+   "smerdyakov": 2,
+   "hohlakov": 2,
+   "marfa": 2,
+   "katerina": 2,
+   "kolya": 3,
+   "marya_k": 2,
+   "kolya_mother": 2,
+   "samsonov": 2,
+   "rakitin": 2,
+   "miusov": 2,
+   "nelyudov": 2
+  },
+  "distinct_persons_covered": 40
+ }
+}

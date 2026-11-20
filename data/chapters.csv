@@ -1,0 +1,97 @@
+seq,part,part_label,book,book_title,chapter,chapter_title,first_pid,n_paragraphs,n_words
+1,1,Part I,1,The History Of A Family,1,Fyodor Pavlovitch Karamazov,0,4,1329
+2,1,Part I,1,The History Of A Family,2,He Gets Rid Of His Eldest Son,4,4,1297
+3,1,Part I,1,The History Of A Family,3,The Second Marriage And The Second Family,8,13,2585
+4,1,Part I,1,The History Of A Family,4,"The Third Son, Alyosha",21,15,3507
+5,1,Part I,1,The History Of A Family,5,Elders,36,17,3630
+6,1,Part I,2,An Unfortunate Gathering,1,They Arrive At The Monastery,53,44,1791
+7,1,Part I,2,An Unfortunate Gathering,2,The Old Buffoon,97,41,3572
+8,1,Part I,2,An Unfortunate Gathering,3,Peasant Women Who Have Faith,138,54,3236
+9,1,Part I,2,An Unfortunate Gathering,4,A Lady Of Little Faith,192,54,3031
+10,1,Part I,2,An Unfortunate Gathering,5,So Be It! So Be It!,246,37,3666
+11,1,Part I,2,An Unfortunate Gathering,6,Why Is Such A Man Alive?,283,69,3924
+12,1,Part I,2,An Unfortunate Gathering,7,A Young Man Bent On A Career,352,68,3460
+13,1,Part I,2,An Unfortunate Gathering,8,The Scandalous Scene,420,55,3512
+14,1,Part I,3,The Sensualists,1,In The Servants’ Quarters,475,14,2252
+15,1,Part I,3,The Sensualists,2,Lizaveta,489,6,1646
+16,1,Part I,3,The Sensualists,3,The Confession Of A Passionate Heart—In Verse,495,47,3320
+17,1,Part I,3,The Sensualists,4,The Confession Of A Passionate Heart—In Anecdote,542,33,3376
+18,1,Part I,3,The Sensualists,5,"The Confession Of A Passionate Heart—""Heels Up""",575,72,3364
+19,1,Part I,3,The Sensualists,6,Smerdyakov,647,32,2147
+20,1,Part I,3,The Sensualists,7,The Controversy,679,41,2172
+21,1,Part I,3,The Sensualists,8,Over The Brandy,720,81,2871
+22,1,Part I,3,The Sensualists,9,The Sensualists,801,81,2057
+23,1,Part I,3,The Sensualists,10,Both Together,882,88,4442
+24,1,Part I,3,The Sensualists,11,Another Reputation Ruined,970,43,3125
+25,2,Part II,4,Lacerations,1,Father Ferapont,1013,67,4120
+26,2,Part II,4,Lacerations,2,At His Father’s,1080,43,1952
+27,2,Part II,4,Lacerations,3,A Meeting With The Schoolboys,1123,45,1819
+28,2,Part II,4,Lacerations,4,At The Hohlakovs’,1168,69,2315
+29,2,Part II,4,Lacerations,5,A Laceration In The Drawing-Room,1237,64,4501
+30,2,Part II,4,Lacerations,6,A Laceration In The Cottage,1301,57,3312
+31,2,Part II,4,Lacerations,7,And In The Open Air,1358,45,4382
+32,2,Part II,5,Pro And Contra,1,The Engagement,1403,97,4422
+33,2,Part II,5,Pro And Contra,2,Smerdyakov With A Guitar,1500,67,2540
+34,2,Part II,5,Pro And Contra,3,The Brothers Make Friends,1567,68,3832
+35,2,Part II,5,Pro And Contra,4,Rebellion,1635,33,4924
+36,2,Part II,5,Pro And Contra,5,The Grand Inquisitor,1668,56,9261
+37,2,Part II,5,Pro And Contra,6,For Awhile A Very Obscure One,1724,67,4325
+38,2,Part II,5,Pro And Contra,7,“It’s Always Worth While Speaking To A Clever Man”,1791,42,3400
+39,2,Part II,6,The Russian Monk,1,Father Zossima And His Visitors,1833,58,6362
+40,2,Part II,6,The Russian Monk,2,The Duel,1891,162,9137
+41,2,Part II,6,The Russian Monk,3,Conversations And Exhortations Of Father Zossima,2053,50,6231
+42,3,Part III,7,Alyosha,1,The Breath Of Corruption,2103,55,5176
+43,3,Part III,7,Alyosha,2,A Critical Moment,2158,43,2418
+44,3,Part III,7,Alyosha,3,An Onion,2201,142,7817
+45,3,Part III,7,Alyosha,4,Cana Of Galilee,2343,30,2047
+46,3,Part III,8,Mitya,1,Kuzma Samsonov,2373,50,4766
+47,3,Part III,8,Mitya,2,Lyagavy,2423,53,2968
+48,3,Part III,8,Mitya,3,Gold-Mines,2476,89,4725
+49,3,Part III,8,Mitya,4,In The Dark,2565,36,2387
+50,3,Part III,8,Mitya,5,A Sudden Resolution,2601,190,6285
+51,3,Part III,8,Mitya,6,"“I Am Coming, Too!”",2791,89,3112
+52,3,Part III,8,Mitya,7,The First And Rightful Lover,2880,226,6331
+53,3,Part III,8,Mitya,8,Delirium,3106,137,5538
+54,3,Part III,9,The Preliminary Investigation,1,The Beginning Of Perhotin’s Official Career,3243,46,2796
+55,3,Part III,9,The Preliminary Investigation,2,The Alarm,3289,25,2700
+56,3,Part III,9,The Preliminary Investigation,3,"The Sufferings Of A Soul, The First Ordeal",3314,61,3566
+57,3,Part III,9,The Preliminary Investigation,4,The Second Ordeal,3375,63,3011
+58,3,Part III,9,The Preliminary Investigation,5,The Third Ordeal,3438,141,4403
+59,3,Part III,9,The Preliminary Investigation,6,The Prosecutor Catches Mitya,3579,77,3164
+60,3,Part III,9,The Preliminary Investigation,7,Mitya’s Great Secret. Received With Hisses,3656,109,4761
+61,3,Part III,9,The Preliminary Investigation,8,The Evidence Of The Witnesses. The Babe,3765,67,3920
+62,3,Part III,9,The Preliminary Investigation,9,They Carry Mitya Away,3832,37,1520
+63,4,Part IV,10,The Boys,1,Kolya Krassotkin,3869,12,2250
+64,4,Part IV,10,The Boys,2,Children,3881,59,2266
+65,4,Part IV,10,The Boys,3,The Schoolboy,3940,133,2912
+66,4,Part IV,10,The Boys,4,The Lost Dog,4073,36,3260
+67,4,Part IV,10,The Boys,5,By Ilusha’s Bedside,4109,123,6662
+68,4,Part IV,10,The Boys,6,Precocity,4232,72,2637
+69,4,Part IV,10,The Boys,7,Ilusha,4304,47,1387
+70,4,Part IV,11,Ivan,1,At Grushenka’s,4351,66,3940
+71,4,Part IV,11,Ivan,2,The Injured Foot,4417,43,4375
+72,4,Part IV,11,Ivan,3,A Little Demon,4460,97,2561
+73,4,Part IV,11,Ivan,4,A Hymn And A Secret,4557,97,5790
+74,4,Part IV,11,Ivan,5,"Not You, Not You!",4654,85,2236
+75,4,Part IV,11,Ivan,6,The First Interview With Smerdyakov,4739,83,3999
+76,4,Part IV,11,Ivan,7,The Second Visit To Smerdyakov,4822,70,3844
+77,4,Part IV,11,Ivan,8,The Third And Last Interview With Smerdyakov,4892,152,6401
+78,4,Part IV,11,Ivan,9,The Devil. Ivan’s Nightmare,5044,111,7940
+79,4,Part IV,11,Ivan,10,“It Was He Who Said That”,5155,38,2249
+80,4,Part IV,12,A Judicial Error,1,The Fatal Day,5193,22,2815
+81,4,Part IV,12,A Judicial Error,2,Dangerous Witnesses,5215,63,3807
+82,4,Part IV,12,A Judicial Error,3,The Medical Experts And A Pound Of Nuts,5278,23,2292
+83,4,Part IV,12,A Judicial Error,4,Fortune Smiles On Mitya,5301,61,3980
+84,4,Part IV,12,A Judicial Error,5,A Sudden Catastrophe,5362,52,4124
+85,4,Part IV,12,A Judicial Error,6,The Prosecutor’s Speech. Sketches Of Character,5414,23,4040
+86,4,Part IV,12,A Judicial Error,7,An Historical Survey,5437,13,2062
+87,4,Part IV,12,A Judicial Error,8,A Treatise On Smerdyakov,5450,24,4101
+88,4,Part IV,12,A Judicial Error,9,The Galloping Troika. The End Of The Prosecutor’s Speech.,5474,73,4578
+89,4,Part IV,12,A Judicial Error,10,The Speech For The Defense. An Argument That Cuts Both Ways,5547,11,1703
+90,4,Part IV,12,A Judicial Error,11,There Was No Money. There Was No Robbery,5558,17,2818
+91,4,Part IV,12,A Judicial Error,12,And There Was No Murder Either,5575,18,3415
+92,4,Part IV,12,A Judicial Error,13,A Corrupter Of Thought,5593,22,3416
+93,4,Part IV,12,A Judicial Error,14,The Peasants Stand Firm,5615,53,2572
+94,5,Epilogue,13,Epilogue,1,Plans For Mitya’s Escape,5668,28,2207
+95,5,Epilogue,13,Epilogue,2,For A Moment The Lie Becomes Truth,5696,57,3090
+96,5,Epilogue,13,Epilogue,3,Ilusha’s Funeral. The Speech At The Stone,5753,77,4036

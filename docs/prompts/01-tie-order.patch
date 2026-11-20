@@ -1,0 +1,85 @@
+--- a/analysis/bknet.py
++++ b/analysis/bknet.py
+@@ -243,8 +243,11 @@
+ 
+ def build_graph(edges: pd.DataFrame, threshold: int = 0) -> nx.Graph:
++    """엣지 표로 그래프를 만든다. 노드는 id 순, 엣지는 (횟수 큰 순, source, target) 순으로 넣는다.
++    Louvain 과 배치는 넣은 순서에 따라 결과가 달라지므로 순서를 표의 행 순서에 맡기지 않는다."""
++    keep = edges[edges.value > threshold].sort_values(["value", "source", "target"], ascending=[False, True, True])
+     g = nx.Graph()
+-    for r in edges.itertuples(index=False):
+-        if r.value > threshold:
+-            g.add_edge(r.source, r.target, weight=int(r.value), distance=1.0 / r.value)
++    g.add_nodes_from(sorted(set(keep.source) | set(keep.target)))
++    for r in keep.itertuples(index=False):
++        g.add_edge(r.source, r.target, weight=int(r.value), distance=1.0 / r.value)
+     return g
+ 
+--- a/analysis/04_network.py
++++ b/analysis/04_network.py
+@@ -50,6 +50,6 @@
+     nodes["n_paragraphs"] = M.groupby("char_id").pid.nunique()
+     nodes["n_chapters"] = M.groupby("char_id").chap_seq.nunique()
+-    first = M.sort_values("pid").groupby("char_id").first()
+-    last = M.sort_values("pid").groupby("char_id").last()
++    first = M.sort_values("pid", kind="stable").groupby("char_id").first()
++    last = M.sort_values("pid", kind="stable").groupby("char_id").last()
+     nodes["first_chapter"] = first.book.astype(str) + "." + first.chapter.astype(str)
+     nodes["last_chapter"] = last.book.astype(str) + "." + last.chapter.astype(str)
+@@ -63,8 +63,9 @@
+     graphs, cens, parts = {}, {}, {}
+     for unit, kw in UNITS.items():
+-        E = bknet.cooccurrence_edges(M, unit, **kw).sort_values("value", ascending=False)
++        E = bknet.cooccurrence_edges(M, unit, **kw).sort_values(["value", "source", "target"], ascending=[False, True, True])
+         E.to_csv(OUT / f"edges_{unit}.csv", index=False)
+         G = bknet.build_graph(E, threshold=MIN_WEIGHT - 1)
+-        giant = G.subgraph(max(nx.connected_components(G), key=len)).copy()
++        comp = max(nx.connected_components(G), key=len)
++        giant = bknet.build_graph(E[E.source.isin(comp) & E.target.isin(comp)], threshold=MIN_WEIGHT - 1)
+         part, mod, stab = bknet.communities(giant)
+         cen = bknet.centralities(giant)
+@@ -82,7 +83,9 @@
+             nodes=G.number_of_nodes(), edges=G.number_of_edges(), giant_nodes=giant.number_of_nodes(),
+             density=round(nx.density(giant), 4), avg_clustering=round(nx.average_clustering(giant), 4),
+-            modularity=round(mod, 4), community_stability=stab, communities=comm_list,
++            modularity=round(mod, 4),
++            community_stability={k: round(v, 6) if isinstance(v, float) else v for k, v in stab.items()},
++            communities=comm_list,
+             top_edges=[(a, b, int(v)) for a, b, v in E.head(25).itertuples(index=False)],
+-            top={col: [(v, round(float(x), 4)) for v, x in cen[col].sort_values(ascending=False).head(15).items()]
++            top={col: [(v, round(float(x), 4)) for v, x in cen[col].sort_values(ascending=False, kind="stable").head(15).items()]
+                  for col in ("degree", "strength", "pagerank", "betweenness")},
+         )
+@@ -149,6 +152,6 @@
+         )
+ 
+-    nodes = nodes.sort_values("mentions", ascending=False)
+-    nodes.to_csv(OUT / "nodes.csv")
++    nodes = nodes.sort_values("mentions", ascending=False, kind="stable")
++    nodes.round(10).to_csv(OUT / "nodes.csv")
+     (OUT / "summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=1), encoding="utf-8")
+ 
+--- a/analysis/06_layout.py
++++ b/analysis/06_layout.py
+@@ -2,5 +2,6 @@
+ """06_layout.py : 네트워크 그림의 노드 자리를 정하고 정지 그림을 그린다
+ 
+-문단 단위 네트워크에 ForceAtlas2 를 돌려 자리를 잡고, 이름표가 겹치지 않게 조금씩 밀어낸다.
++문단 단위 네트워크의 묶음(커뮤니티)마다 원을 하나 잡고 그 안에서 Kamada-Kawai 로 자리를 정한 뒤,
++이름표가 겹치지 않게 조금씩 밀어낸다.
+ 자리는 results/network/layout.csv 에 저장해 웹 페이지와 그림이 같은 배치를 쓴다.
+ 단위(문장/문단/장)나 권을 바꿔도 노드는 제자리에 있어야 변화가 눈에 들어오기 때문이다.
+@@ -236,5 +237,5 @@
+     tray = []
+     for v in loose:
+-        cand = E[((E.source == v) & E.target.isin(pos)) | ((E.target == v) & E.source.isin(pos))].sort_values("value", ascending=False)
++        cand = E[((E.source == v) & E.target.isin(pos)) | ((E.target == v) & E.source.isin(pos))].sort_values(["value", "source", "target"], ascending=[False, True, True])
+         if len(cand):
+             r = cand.iloc[0]
+@@ -265,5 +266,5 @@
+     fig.patch.set_facecolor("#fcfcfb"); ax.set_facecolor("#fcfcfb")
+     wmax = E.value.max()
+-    for r in E[E.value >= 2].sort_values("value").itertuples(index=False):
++    for r in E[E.value >= 2].sort_values(["value", "source", "target"]).itertuples(index=False):
+         (x1, y1), (x2, y2) = pos[r.source], pos[r.target]
+         same = part.get(r.source) == part.get(r.target)

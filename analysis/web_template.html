@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>카라마조프 가의 형제들: 인물과 어휘의 네트워크</title>
+<style>
+:root {
+  color-scheme: light;
+  --page: #f9f9f7; --surface: #fcfcfb; --ink: #0b0b0b; --ink2: #52514e; --muted: #898781;
+  --grid: #e1e0d9; --axis: #c3c2b7; --border: rgba(11,11,11,.10); --wash: rgba(11,11,11,.045);
+  --c-alyosha: #2a78d6; --c-mitya: #eb6834; --c-kolya: #1baf7a; --c-fyodor: #6b6a66; --c-none: #c3c2b7;
+  --pos-noun: #6250d6; --pos-verb: #eda100; --pos-adj: #e87ba4;
+  --edge: #898781;
+}
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface: #1a1a19; --ink: #f0efec; --ink2: #c3c2b7; --muted: #898781;
+    --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,.10); --wash: rgba(255,255,255,.06);
+    --c-alyosha: #3987e5; --c-mitya: #d95926; --c-kolya: #199e70; --c-fyodor: #a3a29b; --c-none: #52514e;
+    --pos-noun: #9085e9; --pos-verb: #c98500; --pos-adj: #d55181;
+    --edge: #898781;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0d0d0d; --surface: #1a1a19; --ink: #f0efec; --ink2: #c3c2b7; --muted: #898781;
+  --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,.10); --wash: rgba(255,255,255,.06);
+  --c-alyosha: #3987e5; --c-mitya: #d95926; --c-kolya: #199e70; --c-fyodor: #a3a29b; --c-none: #52514e;
+  --pos-noun: #9085e9; --pos-verb: #c98500; --pos-adj: #d55181;
+  --edge: #898781;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--page); color: var(--ink);
+  font: 15px/1.55 system-ui, -apple-system, "Segoe UI", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.app { max-width: 1480px; margin: 0 auto; padding: 22px 22px 28px; }
+header h1 { font-size: 26px; line-height: 1.25; font-weight: 700; margin: 0 0 4px; letter-spacing: -.01em; }
+header .lede { margin: 0 0 14px; color: var(--ink2); max-width: 74ch; }
+.filters { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; margin-bottom: 12px; }
+.filters label { display: inline-flex; align-items: center; gap: 7px; color: var(--ink2); font-size: 13.5px; }
+.filters select, .filters input[type=number] {
+  font: inherit; font-size: 13.5px; color: var(--ink); background: var(--surface);
+  border: 1px solid var(--border); border-radius: 6px; padding: 4px 8px;
+}
+.filters input[type=number] { width: 58px; }
+.filters input[type=range] { width: 170px; accent-color: var(--ink2); }
+.filters .book-name { min-width: 15ch; color: var(--ink); font-size: 13.5px; }
+.filters .check { gap: 6px; }
+.filters .spacer { flex: 1 1 auto; }
+.filters [disabled], .filters .off { opacity: .45; }
+main { display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: 14px; align-items: start; }
+.stage {
+  position: relative; background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+  height: min(80vh, 800px); min-height: 500px; overflow: hidden;
+}
+#net { display: block; width: 100%; height: 100%; touch-action: none; cursor: grab; }
+#net.panning { cursor: grabbing; }
+#net text { font-family: inherit; fill: var(--ink); pointer-events: none; paint-order: stroke; stroke: var(--surface); stroke-width: 3px; stroke-linejoin: round; }
+#net text.minor { fill: var(--ink2); }
+#net .edge { fill: none; stroke-linecap: round; transition: opacity .12s; }
+#net .node { cursor: pointer; }
+#net .node .mark { stroke: var(--surface); stroke-width: 2px; transition: opacity .12s; }
+#net .node.embedded .mark { fill: var(--surface) !important; stroke-width: 2.6px; }
+#net .node:focus { outline: none; }
+#net .node:focus-visible .halo, #net .node.sel .halo { stroke: var(--ink); stroke-width: 1.6px; fill: none; opacity: 1; }
+#net .halo { opacity: 0; fill: none; }
+#net .dim .mark, #net text.dim { opacity: .16; }
+#net .edge.dim { opacity: .035 !important; }
+#net .absent .mark { opacity: .22; }
+.zoom { position: absolute; right: 10px; top: 10px; display: flex; gap: 4px; }
+.zoom button, .seg button, .linkish {
+  font: inherit; font-size: 13px; color: var(--ink2); background: var(--surface); border: 1px solid var(--border);
+  border-radius: 6px; padding: 3px 9px; cursor: pointer;
+}
+.zoom button:hover, .seg button:hover, .linkish:hover { background: var(--wash); }
+.legend {
+  position: absolute; left: 12px; top: 10px; font-size: 12.5px; color: var(--ink2); line-height: 1.5;
+  background: color-mix(in srgb, var(--surface) 86%, transparent); padding: 6px 9px; border-radius: 8px; max-width: 236px;
+}
+.legend .row { display: flex; align-items: center; gap: 7px; }
+.legend .note { margin-top: 3px; color: var(--muted); }
+.sw { display: inline-block; width: 11px; height: 11px; border-radius: 50%; flex: 0 0 auto; }
+.sw.sq { border-radius: 2px; }
+.sw.ring { background: transparent !important; border: 2.5px solid var(--ink2); }
+#tip {
+  position: absolute; pointer-events: none; z-index: 5; background: var(--surface); color: var(--ink);
+  border: 1px solid var(--border); border-radius: 8px; padding: 7px 10px; font-size: 12.5px; line-height: 1.45;
+  box-shadow: 0 4px 14px rgba(0,0,0,.14); max-width: 260px; display: none;
+}
+#tip b { font-size: 13.5px; }
+#tip .sub { color: var(--ink2); }
+aside {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px 16px 14px;
+  max-height: min(80vh, 800px); min-height: 500px; overflow: auto;
+}
+aside h2 { font-size: 20px; margin: 0; line-height: 1.3; }
+aside .alt { color: var(--ink2); font-size: 13.5px; }
+aside h3 { font-size: 13.5px; font-weight: 600; margin: 18px 0 6px; color: var(--ink); }
+aside p { margin: 6px 0; color: var(--ink2); font-size: 13.5px; }
+aside .comm { display: flex; align-items: center; gap: 7px; font-size: 13.5px; color: var(--ink2); margin-top: 6px; }
+.tiles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 12px; }
+.tile { border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; }
+.tile .v { font-size: 20px; font-weight: 600; line-height: 1.2; }
+.tile .l { font-size: 12px; color: var(--ink2); }
+.nb { display: grid; grid-template-columns: minmax(0, 176px) 1fr; gap: 3px 8px; align-items: center; font-size: 13px; }
+.nb button { all: unset; cursor: pointer; display: flex; align-items: center; gap: 6px; color: var(--ink); min-width: 0; border-radius: 4px; }
+.nb button .nm { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; min-width: 0; }
+.nb button:hover { text-decoration: underline; }
+.nb button:focus-visible, .linkish:focus-visible, .seg button:focus-visible, .zoom button:focus-visible, tr:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.nb .bar { display: flex; align-items: center; gap: 6px; color: var(--ink2); font-variant-numeric: tabular-nums; }
+.nb .bar i { display: block; height: 10px; border-radius: 0 4px 4px 0; min-width: 2px; }
+.seg { display: inline-flex; gap: 4px; flex-wrap: wrap; }
+.seg button[aria-pressed=true] { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+.wn text { font-size: 11.5px; fill: var(--ink); }
+.wn text.head { font-size: 11.5px; fill: var(--ink2); font-weight: 600; }
+.wn path { fill: none; stroke: var(--axis); }
+.wn circle, .wn rect { stroke: var(--surface); stroke-width: 1.5px; }
+.wlist { display: grid; gap: 8px 12px; font-size: 12.5px; color: var(--ink2); }
+.wlist div b { display: block; color: var(--ink); font-weight: 600; margin-bottom: 2px; }
+.wlist span { white-space: nowrap; }
+.wlegend { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12px; color: var(--ink2); margin: 4px 0 6px; }
+.wlegend span { display: inline-flex; align-items: center; gap: 5px; }
+.tablewrap { position: absolute; inset: 0; overflow: auto; background: var(--surface); padding: 12px 14px; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th, td { text-align: left; padding: 5px 8px; border-bottom: 1px solid var(--grid); white-space: nowrap; }
+th { color: var(--ink2); font-weight: 600; position: sticky; top: -12px; background: var(--surface); }
+td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
+tbody tr { cursor: pointer; }
+tbody tr:hover { background: var(--wash); }
+footer { margin-top: 12px; color: var(--muted); font-size: 12.5px; max-width: 110ch; }
+ul.plain { margin: 6px 0; padding-left: 18px; color: var(--ink2); font-size: 13.5px; }
+ul.plain li { margin: 3px 0; }
+@media (max-width: 980px) {
+  main { grid-template-columns: 1fr; }
+  aside { max-height: none; min-height: 0; }
+  .stage { height: auto; min-height: 0; }
+  #net { height: 78vw; min-height: 300px; max-height: 70vh; }
+  .legend { position: static; max-width: none; background: none; padding: 4px 12px 10px; }
+}
+@media (prefers-reduced-motion: reduce) { #net .edge, #net .node .mark { transition: none; } }
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>카라마조프 가의 형제들: 누가 누구 곁에 나오고 어떤 말이 붙는가</h1>
+    <p class="lede" id="lede"></p>
+    <div class="filters" role="group" aria-label="보기 설정">
+      <label>함께 나온 단위
+        <select id="f-unit">
+          <option value="sentence">같은 문장</option>
+          <option value="paragraph" selected>같은 문단</option>
+          <option value="chapter">같은 장</option>
+        </select>
+      </label>
+      <label>범위
+        <input type="range" id="f-book" min="0" max="13" step="1" value="0" aria-describedby="f-book-name">
+        <span class="book-name" id="f-book-name">소설 전체</span>
+      </label>
+      <label>최소 횟수 <input type="number" id="f-min" min="1" max="30" value="2"></label>
+      <label>이름 표기
+        <select id="f-lang"><option value="ko" selected>한글</option><option value="en">English</option></select>
+      </label>
+      <span class="spacer"></span>
+      <label class="check"><input type="checkbox" id="f-base"> 수업 코드 그대로 돌린 결과</label>
+      <label class="check"><input type="checkbox" id="f-table"> 표로 보기</label>
+    </div>
+  </header>
+  <main>
+    <section class="stage" aria-label="인물 네트워크">
+      <svg id="net" role="group" aria-label="인물 공출현 네트워크"></svg>
+      <div class="zoom"><button id="z-in" aria-label="확대">+</button><button id="z-out" aria-label="축소">−</button><button id="z-fit">전체 보기</button></div>
+      <div class="legend" id="legend"></div>
+      <div id="tip" role="status"></div>
+      <div class="tablewrap" id="tablewrap" hidden></div>
+    </section>
+    <aside id="panel" aria-live="polite"></aside>
+  </main>
+  <footer id="foot"></footer>
+</div>
+<script>
+let D = /*__DATA__*/;      // 한 파일로 만들 때는 여기에 데이터가 들어가고, 나눠 올릴 때는 null 이 들어가 data.json 을 읽는다
+
+const SVGNS = "http://www.w3.org/2000/svg";
+const $ = (s, r = document) => r.querySelector(s);
+function svg(tag, attrs, parent) {
+  const e = document.createElementNS(SVGNS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+}
+function h(tag, props, ...kids) {
+  const e = document.createElement(tag);
+  for (const k in (props || {})) {
+    if (k === "class") e.className = props[k];
+    else if (k === "text") e.textContent = props[k];
+    else if (k.slice(0, 2) === "on") e.addEventListener(k.slice(2), props[k]);
+    else if (k === "style") e.style.cssText = props[k];
+    else e.setAttribute(k, props[k]);
+  }
+  for (const kid of kids) if (kid != null) e.append(kid);
+  return e;
+}
+const fmt = n => Number(n).toLocaleString("ko-KR");
+const SLOTS = ["alyosha", "mitya", "kolya", "fyodor"];
+const UNIT_LABEL = { sentence: "같은 문장", paragraph: "같은 문단", chapter: "같은 장" };
+const BASE_CAT = { name: ["이름", "alyosha"], fragment: ["부칭이나 성의 조각", "mitya"], other: ["사람이 아닌 낱말", "kolya"] };
+
+const S = { unit: "paragraph", book: 0, minW: 2, lang: "ko", base: false, table: false, sel: null, method: "key", wlist: false };
+const V = { k: 1, tx: 0, ty: 0, w: 800, h: 600, fitK: 1 };      // 화면 변환
+let idIndex = {};
+const meas = document.createElement("canvas").getContext("2d");
+
+function nodeLabel(n) { return S.base ? n.id : (S.lang === "ko" ? n.ko : n.name); }
+function bookName(b) {
+  if (!b) return "소설 전체";
+  const bk = D.meta.books[b - 1];
+  return b === 13 ? "에필로그" : b + "권 " + bk.title;
+}
+
+/* ---- 현재 설정에서의 그래프 ---- */
+function graph() {
+  if (S.base) {
+    const nodes = D.baseline.nodes, edges = D.baseline.edges;
+    return decorate(nodes, edges, n => BASE_CAT[n.cat][1], () => true);
+  }
+  const src = S.book ? ((D.edgesByBook[S.unit] || {})[S.book] || []) : D.edges[S.unit];
+  const edges = src.filter(e => e[2] >= S.minW);
+  return decorate(D.nodes, edges, n => (n.u[S.unit] || {}).c || null, n => !S.book || n.byBook[S.book - 1] > 0);
+}
+function decorate(nodes, edges, slotOf, presentOf) {
+  const str = new Array(nodes.length).fill(0), deg = new Array(nodes.length).fill(0), adj = nodes.map(() => []);
+  let maxW = 1;
+  for (const [a, b, w] of edges) { str[a] += w; str[b] += w; deg[a]++; deg[b]++; adj[a].push([b, w]); adj[b].push([a, w]); if (w > maxW) maxW = w; }
+  const maxS = Math.max(1, ...str);
+  return { nodes, edges, str, deg, adj, maxW, maxS, slot: nodes.map(slotOf), present: nodes.map(presentOf) };
+}
+
+/* ---- 그리기 ---- */
+const net = $("#net");
+let G = null, drawn = null;
+function fit() {
+  const r = net.getBoundingClientRect();
+  V.w = r.width; V.h = r.height;
+  V.fitK = Math.min(V.w / D.meta.width, V.h / D.meta.height);
+  V.k = V.fitK; V.tx = (V.w - D.meta.width * V.k) / 2; V.ty = (V.h - D.meta.height * V.k) / 2;
+}
+const px = n => [n.x * V.k + V.tx, n.y * V.k + V.ty];
+function radius(i) {
+  const z = Math.pow(V.k / V.fitK, 0.35) * Math.max(0.8, Math.min(1.15, V.fitK / 0.62));
+  return G.str[i] > 0 ? (4.5 + 19 * Math.sqrt(G.str[i] / G.maxS)) * z : 3.4 * z;
+}
+function fontSize(i) {
+  const z = Math.pow(V.k / V.fitK, 0.25);
+  return (10.5 + 9.5 * Math.sqrt(G.str[i] / G.maxS)) * z;
+}
+function colorVar(slot) { return slot ? "var(--c-" + slot + ")" : "var(--c-none)"; }
+
+function render() {
+  G = graph();
+  net.setAttribute("viewBox", "0 0 " + V.w + " " + V.h);
+  net.replaceChildren();
+  const gE = svg("g", {}, net), gN = svg("g", {}, net), gL = svg("g", {}, net);
+  const P = G.nodes.map(px), R = G.nodes.map((_, i) => radius(i));
+  const focus = S.sel != null ? S.sel : null;
+  const near = focus != null ? new Set([focus, ...G.adj[focus].map(a => a[0])]) : null;
+
+  // 엣지: 가는 것부터 그려 굵은 것이 위에 오게
+  const order = G.edges.map((e, i) => i).sort((a, b) => G.edges[a][2] - G.edges[b][2]);
+  const edgeEls = [];
+  for (const ei of order) {
+    const [a, b, w] = G.edges[ei];
+    const [x1, y1] = P[a], [x2, y2] = P[b];
+    const dx = x2 - x1, dy = y2 - y1, len = Math.hypot(dx, dy) || 1;
+    const bend = ((a + b) % 2 ? 1 : -1) * 0.10 * len;
+    const cx = (x1 + x2) / 2 - dy / len * bend, cy = (y1 + y2) / 2 + dx / len * bend;
+    const same = G.slot[a] && G.slot[a] === G.slot[b];
+    const t = Math.sqrt(w / G.maxW);
+    const el = svg("path", {
+      class: "edge" + (near && !(a === focus || b === focus) ? " dim" : ""),
+      d: `M${x1.toFixed(1)},${y1.toFixed(1)}Q${cx.toFixed(1)},${cy.toFixed(1)} ${x2.toFixed(1)},${y2.toFixed(1)}`,
+      stroke: same ? colorVar(G.slot[a]) : "var(--edge)", "stroke-width": (0.6 + 6.2 * t).toFixed(2),
+      opacity: (near && (a === focus || b === focus) ? 0.42 + 0.5 * t : 0.13 + 0.5 * t).toFixed(2),
+    }, gE);
+    edgeEls.push([a, b, el]);
+  }
+
+  // 노드
+  const nodeEls = [];
+  G.nodes.forEach((n, i) => {
+    const [x, y] = P[i], r = R[i];
+    const absent = !G.present[i] && G.str[i] === 0;
+    if (absent && S.book) return void nodeEls.push(null);
+    const g = svg("g", {
+      class: "node" + (n.kind === "embedded" ? " embedded" : "") + (S.sel === i ? " sel" : "") + (near && !near.has(i) ? " dim" : "") + (G.str[i] === 0 ? " absent" : ""),
+      tabindex: 0, role: "button", "aria-label": nodeLabel(n) + ", 함께 나온 인물 " + G.deg[i] + "명",
+    }, gN);
+    const col = colorVar(G.slot[i]);
+    svg("circle", { class: "halo", cx: x, cy: y, r: r + 4.5 }, g);
+    if (G.slot[i] === "fyodor" && !S.base) svg("rect", { class: "mark", x: x - r * .9, y: y - r * .9, width: r * 1.8, height: r * 1.8, rx: 2.5, fill: col, stroke: n.kind === "embedded" ? col : null }, g);
+    else {
+      const c = svg("circle", { class: "mark", cx: x, cy: y, r, fill: col }, g);
+      if (n.kind === "embedded") c.style.stroke = col;
+    }
+    if (n.kind === "embedded" && G.slot[i] === "fyodor") g.querySelector(".mark").style.stroke = col;
+    svg("circle", { cx: x, cy: y, r: Math.max(r, 13), fill: "transparent" }, g);
+    g.addEventListener("pointerenter", ev => { hover(i, ev); });
+    g.addEventListener("pointermove", ev => moveTip(ev));
+    g.addEventListener("pointerleave", () => { hover(null); });
+    g.addEventListener("focus", () => hover(i, null));
+    g.addEventListener("blur", () => hover(null));
+    g.addEventListener("click", ev => { ev.stopPropagation(); select(i); });
+    g.addEventListener("keydown", ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); select(i); } });
+    nodeEls.push(g);
+  });
+
+  // 이름표: 중요한 인물부터 놓고, 자리가 없으면 숨긴다 (가리키면 보인다)
+  const rank = G.nodes.map((_, i) => i).filter(i => nodeEls[i]).sort((a, b) => (focus != null ? ((b === focus) - (a === focus)) || (near.has(b) - near.has(a)) : 0) || G.str[b] - G.str[a]);
+  const boxes = G.nodes.map((_, i) => nodeEls[i] ? [P[i][0] - R[i] - 1, P[i][1] - R[i] - 1, P[i][0] + R[i] + 1, P[i][1] + R[i] + 1, i] : null).filter(Boolean);
+  const placed = [], labelEls = new Array(G.nodes.length).fill(null);
+  const nearTop = focus != null ? new Set(G.adj[focus].slice().sort((a, b) => b[1] - a[1]).slice(0, 8).map(a => a[0])) : null;
+  const ov = (a, b) => Math.max(0, Math.min(a[2], b[2]) - Math.max(a[0], b[0])) * Math.max(0, Math.min(a[3], b[3]) - Math.max(a[1], b[1]));
+  rank.forEach((i, order) => {
+    const n = G.nodes[i], fs = fontSize(i), bold = G.str[i] > G.maxS * 0.12, label = nodeLabel(n);
+    meas.font = (bold ? "700 " : "400 ") + fs + "px system-ui, sans-serif";
+    const w = meas.measureText(label).width + 4, hh = fs * 1.22, [x, y] = P[i], r = R[i];
+    const d = r * 0.72;
+    const cands = [[x, y + r + hh / 2 + 2], [x, y - r - hh / 2 - 2], [x + r + w / 2 + 4, y], [x - r - w / 2 - 4, y],
+      [x + d + w / 2 + 3, y + d + hh / 2], [x - d - w / 2 - 3, y + d + hh / 2], [x + d + w / 2 + 3, y - d - hh / 2], [x - d - w / 2 - 3, y - d - hh / 2]];
+    let best = null;
+    for (const [cx, cy] of cands) {
+      const b = [cx - w / 2, cy - hh / 2, cx + w / 2, cy + hh / 2];
+      let cost = 0;
+      for (const q of placed) cost += ov(b, q);
+      for (const q of boxes) if (q[4] !== i) cost += ov(b, q);
+      const out = Math.max(0, -b[0]) + Math.max(0, b[2] - V.w) + Math.max(0, -b[1]) + Math.max(0, b[3] - V.h);
+      cost += out * hh * 3;
+      if (!best || cost < best.cost - 1e-6) best = { cost, cx, cy, b };
+      if (cost === 0) break;
+    }
+    const must = order < 10 || S.sel === i || (nearTop && nearTop.has(i));
+    const show = G.str[i] > 0 && (best.cost < w * hh * 0.08 || must);
+    const t = svg("text", {
+      x: best.cx.toFixed(1), y: (best.cy + fs * 0.34).toFixed(1), "text-anchor": "middle", "font-size": fs.toFixed(1),
+      "font-weight": bold ? 700 : 400, class: (G.str[i] > G.maxS * 0.05 ? "" : "minor") + (near && !near.has(i) ? " dim" : ""),
+    }, gL);
+    t.textContent = label;
+    if (!show) t.style.display = "none"; else placed.push(best.b);
+    labelEls[i] = t;
+  });
+  drawn = { nodeEls, edgeEls, labelEls };
+  renderLegend();
+}
+
+/* ---- 가리키기, 고르기 ---- */
+const tip = $("#tip");
+function hover(i, ev) {
+  if (!drawn) return;
+  const focus = i != null ? i : S.sel;
+  const near = focus != null ? new Set([focus, ...G.adj[focus].map(a => a[0])]) : null;
+  drawn.nodeEls.forEach((g, j) => g && g.classList.toggle("dim", !!near && !near.has(j)));
+  drawn.labelEls.forEach((t, j) => {
+    if (!t) return;
+    t.classList.toggle("dim", !!near && !near.has(j));
+    if (j === i && t.style.display === "none") { t.style.display = ""; t.dataset.temp = "1"; }
+    else if (t.dataset.temp && j !== i) { t.style.display = "none"; delete t.dataset.temp; }
+  });
+  for (const [a, b, el] of drawn.edgeEls) el.classList.toggle("dim", !!near && !(a === focus || b === focus));
+  if (i == null) { tip.style.display = "none"; return; }
+  const n = G.nodes[i];
+  tip.replaceChildren();
+  tip.append(h("b", { text: nodeLabel(n) }));
+  if (!S.base) tip.append(h("div", { class: "sub", text: S.lang === "ko" ? n.name : n.ko }));
+  tip.append(h("div", { text: "함께 나온 인물 " + G.deg[i] + "명, 횟수 합 " + fmt(G.str[i]) }));
+  const top = G.adj[i].slice().sort((a, b) => b[1] - a[1]).slice(0, 3).map(([j, w]) => nodeLabel(G.nodes[j]) + " " + w);
+  if (top.length) tip.append(h("div", { class: "sub", text: top.join(", ") }));
+  tip.style.display = "block";
+  if (ev) moveTip(ev); else {
+    const [x, y] = px(n); tip.style.left = Math.min(V.w - 240, x + 14) + "px"; tip.style.top = Math.max(4, y - 10) + "px";
+  }
+}
+function moveTip(ev) {
+  const r = net.getBoundingClientRect();
+  const x = ev.clientX - r.left, y = ev.clientY - r.top;
+  tip.style.left = Math.min(V.w - tip.offsetWidth - 6, x + 14) + "px";
+  tip.style.top = Math.min(V.h - tip.offsetHeight - 6, Math.max(4, y + 12)) + "px";
+}
+function select(i) { S.sel = i; render(); renderPanel(); if (S.table) renderTable(); }
+
+/* ---- 범례 ---- */
+function renderLegend() {
+  const L = $("#legend");
+  L.replaceChildren();
+  if (S.base) {
+    const count = { name: 0, fragment: 0, other: 0 };
+    D.baseline.nodes.forEach(n => count[n.cat]++);
+    for (const c of ["name", "fragment", "other"])
+      L.append(h("div", { class: "row" }, h("span", { class: "sw", style: "background:var(--c-" + BASE_CAT[c][1] + ")" }), BASE_CAT[c][0] + " " + count[c] + "개"));
+    L.append(h("div", { class: "note", text: "수업 코드가 등장인물로 뽑은 낱말 " + D.baseline.nodes.length + "개" }));
+    return;
+  }
+  for (const c of D.communities[S.unit]) {
+    const top = D.nodes[idIndex[c.top]];
+    L.append(h("div", { class: "row" },
+      h("span", { class: "sw" + (c.slot === "fyodor" ? " sq" : ""), style: "background:var(--c-" + c.slot + ")" }),
+      nodeLabel(top) + " 쪽 묶음 " + c.size + "명"));
+  }
+  L.append(h("div", { class: "row" }, h("span", { class: "sw ring" }), "작중 이야기 속의 인물"));
+  L.append(h("div", { class: "note", text: "크기는 함께 나온 횟수의 합," }), h("div", { class: "note", style: "margin-top:0", text: "선의 굵기는 둘이 함께 나온 횟수" }));
+}
+
+/* ---- 옆 패널 ---- */
+function swatch(slot, kind) {
+  return h("span", { class: "sw" + (slot === "fyodor" ? " sq" : "") + (kind === "embedded" ? " ring" : ""), style: (kind === "embedded" ? "border-color:" : "background:") + colorVar(slot) });
+}
+function renderPanel() {
+  const A = $("#panel");
+  A.replaceChildren();
+  if (S.base) return panelBaseline(A);
+  if (S.sel == null) return panelOverview(A);
+  const i = S.sel, n = D.nodes[i], u = n.u[S.unit];
+  A.append(h("h2", { text: S.lang === "ko" ? n.ko : n.name }), h("div", { class: "alt", text: S.lang === "ko" ? n.name : n.ko }));
+  if (n.desc) A.append(h("p", { text: n.desc }));
+  if (u && u.c) {
+    const c = D.communities[S.unit].find(c => c.slot === u.c);
+    A.append(h("div", { class: "comm" }, swatch(u.c, n.kind), nodeLabel(D.nodes[idIndex[c.top]]) + " 쪽 묶음" + (n.kind === "embedded" ? ", 작중 이야기 속의 인물" : "")));
+  } else A.append(h("div", { class: "comm" }, swatch(null, n.kind), "두 번 이상 함께 나온 상대가 없어 묶음에 들지 않았습니다"));
+
+  const rankOf = key => {
+    const arr = D.nodes.map(m => (m.u[S.unit] || {})[key]).filter(v => v != null).sort((a, b) => b - a);
+    return u ? (arr.indexOf(u[key]) + 1) + "위 / " + arr.length + "명" : "없음";
+  };
+  const mentions = S.book ? n.byBook[S.book - 1] : n.mentions;
+  A.append(h("div", { class: "tiles" },
+    h("div", { class: "tile" }, h("div", { class: "v", text: fmt(mentions) }), h("div", { class: "l", text: (S.book ? bookName(S.book) + "에서 " : "") + "불린 횟수" })),
+    h("div", { class: "tile" }, h("div", { class: "v", text: fmt(G.deg[i]) }), h("div", { class: "l", text: "함께 나온 인물 수" })),
+    h("div", { class: "tile" }, h("div", { class: "v", text: rankOf("str") }), h("div", { class: "l", text: "함께 나온 횟수 합 순위 (소설 전체)" })),
+    h("div", { class: "tile" }, h("div", { class: "v", text: rankOf("btw") }), h("div", { class: "l", text: "묶음 사이를 잇는 정도 순위 (매개 중심성)" }))));
+
+  // 권별 언급
+  A.append(h("h3", { text: "권마다 불린 횟수" }));
+  const bw = 20, gap = 7, H0 = 44, maxB = Math.max(1, ...n.byBook);
+  const bs = svg("svg", { viewBox: `0 0 ${13 * (bw + gap)} ${H0 + 20}`, width: "100%", role: "img", "aria-label": "권별 언급 횟수" });
+  n.byBook.forEach((v, b) => {
+    const hgt = v ? Math.max(2, v / maxB * H0) : 0, x = b * (bw + gap);
+    const g = svg("g", { tabindex: 0, role: "button", "aria-label": bookName(b + 1) + " " + v + "회", style: "cursor:pointer" }, bs);
+    svg("rect", { x, y: 0, width: bw, height: H0 + 18, fill: "transparent" }, g);
+    if (v) svg("path", { d: `M${x},${H0} v${-(hgt - 3)} q0,-3 3,-3 h${bw - 6} q3,0 3,3 v${hgt - 3} z`, fill: u && u.c ? colorVar(u.c) : "var(--ink2)", opacity: S.book && S.book !== b + 1 ? .35 : 1 }, g);
+    const t = svg("text", { x: x + bw / 2, y: H0 + 14, "text-anchor": "middle", "font-size": 10.5, fill: S.book === b + 1 ? "var(--ink)" : "var(--muted)", "font-weight": S.book === b + 1 ? 700 : 400 }, g);
+    t.textContent = b === 12 ? "끝" : b + 1;
+    svg("title", {}, g).textContent = bookName(b + 1) + ": " + v + "회";
+    const go = () => { S.book = S.book === b + 1 ? 0 : b + 1; syncControls(); render(); renderPanel(); if (S.table) renderTable(); };
+    g.addEventListener("click", go);
+    g.addEventListener("keydown", ev => { if (ev.key === "Enter") go(); });
+  });
+  svg("line", { x1: 0, x2: 13 * (bw + gap) - gap, y1: H0 + .5, y2: H0 + .5, stroke: "var(--axis)" }, bs);
+  A.append(bs, h("p", { text: "막대를 누르면 그 권만 봅니다. 가장 많은 권은 " + bookName(n.byBook.indexOf(maxB) + 1) + " " + maxB + "회입니다." }));
+
+  // 가까운 인물
+  A.append(h("h3", { text: "곁에 가장 자주 나오는 인물 (" + UNIT_LABEL[S.unit] + (S.book ? ", " + bookName(S.book) : "") + ")" }));
+  const nb = G.adj[i].slice().sort((a, b) => b[1] - a[1]).slice(0, 8);
+  if (!nb.length) A.append(h("p", { text: "이 설정에서는 함께 나온 인물이 없습니다. 최소 횟수를 낮추거나 범위를 넓혀 보세요." }));
+  else {
+    const box = h("div", { class: "nb" }), mx = nb[0][1];
+    for (const [j, w] of nb) {
+      const m = D.nodes[j];
+      box.append(h("button", { onclick: () => select(j), title: m.name }, swatch(G.slot[j], m.kind), h("span", { class: "nm", text: nodeLabel(m) })),
+        h("div", { class: "bar" }, h("i", { style: "width:" + Math.max(2, w / mx * 118) + "px;background:" + (u && u.c ? colorVar(u.c) : "var(--ink2)") }), String(w)));
+    }
+    A.append(box);
+  }
+  panelWords(A, n, u);
+}
+
+function panelWords(A, n, u) {
+  A.append(h("h3", { text: "이 인물에 붙는 낱말 (사전형)" }));
+  const W = D.words[n.id];
+  if (!W) { A.append(h("p", { text: "이름이 나온 문장이 8개 미만이라 낱말을 뽑지 않았습니다." })); return; }
+  const methods = [["key", "이 인물에게 유난히 많은 말"], ["freq", "빈도순 (수업 방식)"], ["syn", "문장 구조로"]];
+  const seg = h("div", { class: "seg", role: "group", "aria-label": "낱말을 고르는 방식" });
+  for (const [k, lab] of methods) seg.append(h("button", { "aria-pressed": S.method === k, text: lab, onclick: () => { S.method = k; renderPanel(); } }));
+  A.append(seg);
+  const groups = S.method === "syn"
+    ? [["주어일 때의 동사", "verb", W.syn.subj, false], ["대상일 때의 동사", "verb", W.syn.obj, true], ["붙는 형용사", "adj", W.syn.adj, false], ["가진 것", "noun", W.syn.poss, false]]
+    : [["명사", "noun", W[S.method].NOUN, false], ["동사", "verb", W[S.method].VERB, false], ["형용사", "adj", W[S.method].ADJ, false]];
+  const explain = { key: "이름이 나온 문장 " + fmt(W.n) + "개에서, 다른 문장보다 치우쳐 많이 나온 순서입니다.",
+    freq: "이름이 나온 문장 " + fmt(W.n) + "개에 함께 나온 낱말을 많이 나온 순서로 늘어놓았습니다. 누구에게나 흔한 말이 위에 옵니다.",
+    syn: "이름이 주어나 목적어로 쓰인 자리, 이름을 꾸미거나 서술하는 형용사, 이름의 소유물로 나온 명사입니다. 대명사로 받은 자리는 세지 못했습니다." };
+  A.append(h("p", { text: explain[S.method] }));
+  const leg = h("div", { class: "wlegend" });
+  const seen = new Set();
+  for (const [lab, cls, , hollow] of groups) {
+    const key = cls + hollow;
+    if (seen.has(key) && S.method !== "syn") continue;
+    seen.add(key);
+    leg.append(h("span", {}, h("span", { class: "sw" + (hollow ? " ring" : ""), style: (hollow ? "border-color:" : "background:") + "var(--pos-" + cls + ")" }), S.method === "syn" ? lab : lab));
+  }
+  A.append(leg);
+  A.append(h("button", { class: "linkish", text: S.wlist ? "그림으로 보기" : "목록으로 보기", onclick: () => { S.wlist = !S.wlist; renderPanel(); } }));
+  if (S.wlist) {
+    const wl = h("div", { class: "wlist", style: "grid-template-columns:repeat(" + (groups.length > 3 ? 2 : 3) + ",1fr);margin-top:8px" });
+    for (const [lab, , items] of groups) {
+      const d = h("div", {}, h("b", { text: lab }));
+      items.forEach(([w, c]) => d.append(h("span", { text: w + " " + c }), document.createElement("br")));
+      if (!items.length) d.append(h("span", { text: "없음" }));
+      wl.append(d);
+    }
+    A.append(wl);
+    return;
+  }
+  const per = S.method === "syn" ? 9 : 11, cols = groups.length, Wd = 368, colW = Wd / cols, top = 74, step = 21;
+  const Ht = top + per * step + 6;
+  const s = svg("svg", { class: "wn", viewBox: `0 0 ${Wd} ${Ht}`, width: "100%", role: "img", "aria-label": nodeLabel(n) + "에 붙는 낱말 네트워크" });
+  const cx = Wd / 2, cy = 16;
+  let mx = 1;
+  for (const g of groups) for (const it of g[2].slice(0, per)) mx = Math.max(mx, it[1]);
+  const gp = svg("g", {}, s), gc = svg("g", {}, s);
+  groups.forEach(([lab, cls, items, hollow], gi) => {
+    const x0 = gi * colW + 12;
+    const hd = svg("text", { class: "head", x: x0 - 6, y: top - 16 }, gc);
+    hd.textContent = lab;
+    items.slice(0, per).forEach(([w, c], k) => {
+      const y = top + k * step + 4, r = 2.6 + 6.4 * Math.sqrt(c / mx);
+      svg("path", { d: `M${cx},${cy + 8} C${cx},${top - 30} ${x0},${y - 38} ${x0},${y}`, "stroke-width": (0.5 + 1.6 * Math.sqrt(c / mx)).toFixed(2), opacity: (0.35 + 0.5 * Math.sqrt(c / mx)).toFixed(2) }, gp);
+      const g = svg("g", {}, gc);
+      const circ = svg("circle", { cx: x0, cy: y, r, fill: hollow ? "var(--surface)" : "var(--pos-" + cls + ")" }, g);
+      if (hollow) { circ.style.stroke = "var(--pos-" + cls + ")"; circ.style.strokeWidth = "2px"; }
+      const t = svg("text", { x: x0 + r + 5, y: y + 4 }, g);
+      t.textContent = w;
+      svg("title", {}, g).textContent = w + ": " + c + "회";
+    });
+  });
+  const cc = u && u.c === "fyodor" ? svg("rect", { x: cx - 8, y: cy - 8, width: 16, height: 16, rx: 2.5, fill: colorVar(u.c) }, gc)
+    : svg("circle", { cx, cy, r: 9, fill: u && u.c ? colorVar(u.c) : "var(--c-none)" }, gc);
+  cc.style.stroke = "var(--surface)";
+  if (n.kind === "embedded") { cc.setAttribute("fill", "var(--surface)"); cc.style.stroke = colorVar(u && u.c); cc.style.strokeWidth = "2.5px"; }
+  const ct = svg("text", { x: cx + 15, y: cy + 4, "font-weight": 700 }, gc);
+  ct.textContent = nodeLabel(n);
+  A.append(s);
+  A.append(h("p", { text: "원의 크기는 횟수입니다. 낱말에 마우스를 올리면 횟수가 보입니다." }));
+}
+
+function panelOverview(A) {
+  const m = D.meta.units[S.unit];
+  A.append(h("h2", { text: "읽는 법" }));
+  A.append(h("p", { text: "원 하나가 인물 한 사람입니다. 두 사람이 " + UNIT_LABEL[S.unit] + "에 함께 불릴 때마다 한 번으로 세고, " + D.meta.min_weight + "번 이상이면 선으로 이었습니다. 인물을 누르면 그 사람의 수치와 낱말이 여기에 열립니다." }));
+  A.append(h("div", { class: "tiles" },
+    h("div", { class: "tile" }, h("div", { class: "v", text: fmt(m.nodes) }), h("div", { class: "l", text: "이어진 인물" })),
+    h("div", { class: "tile" }, h("div", { class: "v", text: fmt(m.edges) }), h("div", { class: "l", text: "이어진 쌍" })),
+    h("div", { class: "tile" }, h("div", { class: "v", text: fmt(m.units_with_two_or_more) }), h("div", { class: "l", text: "두 사람 이상이 함께 나온 " + UNIT_LABEL[S.unit].replace("같은 ", "") + " 수" })),
+    h("div", { class: "tile" }, h("div", { class: "v", text: m.modularity.toFixed(2) }), h("div", { class: "l", text: "묶음이 갈리는 정도 (modularity)" }))));
+  A.append(h("h3", { text: "묶음" }));
+  const box = h("div", { class: "nb", style: "grid-template-columns:1fr" });
+  for (const c of D.communities[S.unit]) {
+    const top = D.nodes[idIndex[c.top]];
+    const members = D.nodes.filter(n => (n.u[S.unit] || {}).c === c.slot).sort((a, b) => b.u[S.unit].str - a.u[S.unit].str);
+    box.append(h("button", { onclick: () => select(idIndex[c.top]) }, swatch(c.slot), nodeLabel(top) + " 쪽 " + c.size + "명"));
+    box.append(h("div", { style: "color:var(--ink2);font-size:12.5px;margin:0 0 6px 17px;white-space:normal", text: members.slice(0, 9).map(nodeLabel).join(", ") + (members.length > 9 ? " 외" : "") }));
+  }
+  A.append(box);
+  A.append(h("h3", { text: "세 형제는 어디에 있나" }));
+  const ul = h("ul", { class: "plain" });
+  for (const id of ["alyosha", "ivan", "mitya"]) {
+    const n = D.nodes[idIndex[id]], u = n.u[S.unit];
+    if (!u) continue;
+    const c = D.communities[S.unit].find(c => c.slot === u.c);
+    const btw = D.nodes.map(x => (x.u[S.unit] || {}).btw).filter(v => v != null).sort((a, b) => b - a);
+    ul.append(h("li", { text: nodeLabel(n) + ": " + nodeLabel(D.nodes[idIndex[c.top]]) + " 쪽 묶음. 함께 나온 인물 " + u.deg + "명, 매개 중심성 " + u.btw.toFixed(2) + " (" + (btw.indexOf(u.btw) + 1) + "위)" }));
+  }
+  A.append(ul);
+  A.append(h("p", { text: "매개 중심성은 다른 두 사람을 잇는 가장 짧은 길이 이 인물을 얼마나 자주 지나는지를 0과 1 사이로 나타낸 값입니다. 묶음과 묶음 사이에 선 인물일수록 큽니다." }));
+}
+
+function panelBaseline(A) {
+  const b = D.baseline;
+  A.append(h("h2", { text: "수업 코드를 고치지 않고 돌리면" }));
+  A.append(h("p", { text: "수업에서 쓴 BookNetworkAnalyzer를 그대로 이 소설에 돌린 결과입니다. 대문자로 시작하는 고유명사 " + fmt(b.candidates) + "개를 등장인물 후보로 뽑았고, 그 가운데 연결이 많은 " + b.nodes.length + "개가 남았습니다." }));
+  const groups = { name: [], fragment: [], other: [] };
+  b.nodes.forEach(n => groups[n.cat].push(n.id));
+  for (const c of ["other", "fragment", "name"]) {
+    A.append(h("h3", {}, h("span", { class: "sw", style: "background:var(--c-" + BASE_CAT[c][1] + ");margin-right:6px" }), BASE_CAT[c][0] + " " + groups[c].length + "개"));
+    A.append(h("p", { text: groups[c].sort().join(", ") }));
+  }
+  A.append(h("h3", { text: "왜 이렇게 되나" }));
+  const ul = h("ul", { class: "plain" });
+  ul.append(h("li", { text: "러시아 이름은 이름, 부칭, 애칭이 따로 쓰입니다. Alyosha와 Alexey, Mitya와 Dmitri가 다른 사람으로 잡히고, Fyodorovitch 하나에 네 사람이 섞입니다." }));
+  ul.append(h("li", { text: "문장 첫머리의 You, They나 대심문관 장의 Thou, Thy처럼 대문자로 쓰인 대명사가 인물로 들어옵니다." }));
+  ul.append(h("li", { text: "이름 뒤에 공백이 올 때만 세기 때문에 쉼표나 마침표 앞의 이름은 빠집니다. Alyosha는 절반쯤만 세어집니다." }));
+  A.append(ul);
+  A.append(h("p", { text: "체크를 풀면 별칭표를 적용한 결과로 돌아갑니다." }));
+}
+
+/* ---- 표로 보기 ---- */
+function renderTable() {
+  const T = $("#tablewrap");
+  T.hidden = !S.table;
+  if (!S.table) return;
+  T.replaceChildren();
+  const tb = h("tbody");
+  const rows = G.nodes.map((n, i) => i).sort((a, b) => G.str[b] - G.str[a] || G.deg[b] - G.deg[a]);
+  const head = S.base ? ["낱말", "갈래", "함께 나온 낱말 수", "횟수 합"] : ["인물", "묶음", "불린 횟수", "함께 나온 인물", "횟수 합", "PageRank", "매개 중심성"];
+  for (const i of rows) {
+    const n = G.nodes[i];
+    let cells;
+    if (S.base) cells = [n.id, BASE_CAT[n.cat][0], G.deg[i], G.str[i]];
+    else {
+      const u = n.u[S.unit] || {};
+      const c = D.communities[S.unit].find(c => c.slot === u.c);
+      cells = [nodeLabel(n) + " (" + (S.lang === "ko" ? n.name : n.ko) + ")", c ? nodeLabel(D.nodes[idIndex[c.top]]) + " 쪽" : "없음",
+        S.book ? n.byBook[S.book - 1] : n.mentions, G.deg[i], G.str[i], u.pr != null ? u.pr.toFixed(3) : "", u.btw != null ? u.btw.toFixed(3) : ""];
+    }
+    const tr = h("tr", { tabindex: 0 });
+    cells.forEach((c, k) => tr.append(h("td", { class: k >= 2 ? "n" : "", text: typeof c === "number" ? fmt(c) : String(c) })));
+    if (!S.base) { tr.addEventListener("click", () => select(i)); tr.addEventListener("keydown", ev => { if (ev.key === "Enter") select(i); }); }
+    if (S.sel === i) tr.style.background = "var(--wash)";
+    tb.append(tr);
+  }
+  const thead = h("thead", {}, h("tr", {}, ...head.map((t, k) => h("th", { class: k >= 2 ? "n" : "", text: t }))));
+  T.append(h("table", {}, thead, tb));
+  if (!S.base) T.append(h("p", { style: "color:var(--muted);font-size:12.5px", text: "PageRank와 매개 중심성은 소설 전체, " + UNIT_LABEL[S.unit] + " 기준으로 미리 계산한 값입니다. 나머지 열은 지금 설정을 따릅니다." }));
+}
+
+/* ---- 조작 ---- */
+function syncControls() {
+  $("#f-unit").value = S.unit; $("#f-book").value = S.book; $("#f-min").value = S.minW; $("#f-lang").value = S.lang;
+  $("#f-book-name").textContent = bookName(S.book);
+  const noBook = S.unit === "chapter";
+  for (const id of ["f-unit", "f-book", "f-min", "f-lang"]) $("#" + id).disabled = S.base || (id === "f-book" && noBook);
+  $("#f-book").closest("label").classList.toggle("off", S.base || noBook);
+}
+function update() { syncControls(); render(); renderPanel(); renderTable(); }
+$("#f-unit").addEventListener("change", e => { S.unit = e.target.value; if (S.unit === "chapter") S.book = 0; update(); });
+$("#f-book").addEventListener("input", e => { S.book = +e.target.value; update(); });
+$("#f-min").addEventListener("change", e => { S.minW = Math.max(1, Math.min(30, +e.target.value || 1)); update(); });
+$("#f-lang").addEventListener("change", e => { S.lang = e.target.value; update(); });
+$("#f-base").addEventListener("change", e => { S.base = e.target.checked; S.sel = null; update(); });
+$("#f-table").addEventListener("change", e => { S.table = e.target.checked; update(); });
+
+function zoomAt(f, mx, my) {
+  const k2 = Math.max(V.fitK * 0.7, Math.min(V.fitK * 6, V.k * f));
+  V.tx = mx - (mx - V.tx) * (k2 / V.k); V.ty = my - (my - V.ty) * (k2 / V.k); V.k = k2;
+  schedule();
+}
+let raf = 0;
+function schedule() { if (!raf) raf = requestAnimationFrame(() => { raf = 0; render(); }); }
+net.addEventListener("wheel", ev => { ev.preventDefault(); const r = net.getBoundingClientRect(); zoomAt(ev.deltaY < 0 ? 1.15 : 1 / 1.15, ev.clientX - r.left, ev.clientY - r.top); }, { passive: false });
+let drag = null;
+net.addEventListener("pointerdown", ev => { if (ev.target.closest(".node")) return; drag = { x: ev.clientX, y: ev.clientY, tx: V.tx, ty: V.ty, moved: false }; net.setPointerCapture(ev.pointerId); net.classList.add("panning"); });
+net.addEventListener("pointermove", ev => { if (!drag) return; const dx = ev.clientX - drag.x, dy = ev.clientY - drag.y; if (Math.abs(dx) + Math.abs(dy) > 3) drag.moved = true; V.tx = drag.tx + dx; V.ty = drag.ty + dy; schedule(); });
+net.addEventListener("pointerup", ev => { if (drag && !drag.moved && S.sel != null) { S.sel = null; render(); renderPanel(); renderTable(); } drag = null; net.classList.remove("panning"); });
+$("#z-in").addEventListener("click", () => zoomAt(1.3, V.w / 2, V.h / 2));
+$("#z-out").addEventListener("click", () => zoomAt(1 / 1.3, V.w / 2, V.h / 2));
+$("#z-fit").addEventListener("click", () => { fit(); render(); });
+addEventListener("resize", () => { if (D) { fit(); render(); } });
+
+/* ---- 시작 ---- */
+function start() {
+  idIndex = Object.fromEntries(D.nodes.map((n, i) => [n.id, i]));
+  S.minW = D.meta.min_weight;
+  $("#lede").textContent = "Constance Garnett의 영역본(1912) " + fmt(D.meta.text.words) + "단어에서 인물 " + D.meta.characters + "명이 이름이나 호칭으로 불린 "
+    + fmt(D.meta.mentions) + "곳을 찾고, 누가 누구와 함께 불리는지를 세어 이었습니다.";
+  $("#foot").textContent = "본문은 Project Gutenberg 28054번(public domain)입니다. 이름은 손으로 만든 별칭표로 찾았고, 낱말의 품사와 사전형은 spaCy en_core_web_sm으로 구했습니다. "
+    + "묶음은 Louvain 방법으로 찾았으며, 색 세 가지와 네모 하나로 나눈 것은 색을 구별하기 어려운 사람도 가를 수 있게 하기 위해서입니다.";
+  fit(); update();
+}
+if (D) start();
+else fetch("data.json").then(r => r.json()).then(rows => { D = Object.fromEntries(rows.map(r => [r.key, r.value])); start(); })
+  .catch(() => { $("#lede").textContent = "데이터 파일(data.json)을 읽지 못했습니다. index.html과 같은 폴더에 있는지 확인해 주세요."; });
+</script>
+</body>
+</html>

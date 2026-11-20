@@ -1,0 +1,23 @@
+{
+ "tokens": 433084,
+ "sentences_with_content": 23031,
+ "characters": 64,
+ "vocabulary": {
+  "NOUN": 4274,
+  "VERB": 2057,
+  "ADJ": 2050
+ },
+ "content_tokens": {
+  "NOUN": 48124,
+  "VERB": 41528,
+  "ADJ": 16968
+ },
+ "syntax_links": {
+  "subj_verb": 4439,
+  "obj_verb": 1555,
+  "pred_adj": 208,
+  "mod_adj": 132,
+  "poss_noun": 526,
+  "pred_noun": 202
+ }
+}

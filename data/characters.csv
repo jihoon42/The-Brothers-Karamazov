@@ -1,0 +1,71 @@
+id,name,name_ko,desc_ko,kind,group,aliases,role_aliases,note
+alyosha,Alyosha,알료샤,카라마조프가의 셋째 아들. 조시마 장로 밑의 수련 수사,person,family,"Alexey Fyodorovitch Karamazov;Alexey Fyodorovitch;Alexey Karamazov;Alyosha Karamazov;Alyosha;Alexey;Karamazov@4.3,10,13.3",,콜랴와 소년들이 성만 부르는 장에서만 Karamazov를 알료샤로 센다
+mitya,Dmitri (Mitya),드미트리(미챠),카라마조프가의 맏아들. 퇴역 장교이고 아버지를 죽였다는 혐의로 재판을 받는다,person,family,Dmitri Fyodorovitch Karamazov;Dmitri Fyodorovitch;Dmitri Karamazov;Mitya Karamazov;Mitya;Dmitri;Mitenka,"the prisoner@9,11.4,12;Prisoner@12;the captain@7.3,8.3,8.4",재판 장면의 the prisoner와 그루셴카 집 사람들이 부르는 the captain
+ivan,Ivan,이반,카라마조프가의 둘째 아들. 서사시 '대심문관'을 지은 지식인,person,family,Ivan Fyodorovitch Karamazov;Ivan Fyodorovitch;Ivan Karamazov;Ivan,,
+fyodor,Fyodor Pavlovitch,표도르 파블로비치,삼 형제의 아버지. 살해당하는 지주,person,family,Fyodor Pavlovitch Karamazov;Fyodor Pavlovitch;old Karamazov;Fyodor,"the old man@3.4,3.5,3.8,3.9,4.2,5.6,5.7,8.4,9.3,9.5,9.6,9.7,9.8,12.6,12.7,12.8,12.11,12.12",the old man은 장마다 가리키는 사람이 달라 장을 지정했다
+smerdyakov,Smerdyakov,스메르댜코프,표도르의 하인이자 요리사. 표도르의 사생아로 여겨진다,person,household,Pavel Fyodorovitch;Smerdyakov,,
+grigory,Grigory,그리고리,표도르 집의 늙은 하인. 어린 드미트리와 스메르댜코프를 길렀다,person,household,Grigory Vassilyevitch;Grigory,,
+marfa,Marfa,마르파,그리고리의 아내,person,household,Marfa Ignatyevna;Marfa,,
+adelaida,Adelaïda Ivanovna,아델라이다 이바노브나,표도르의 첫 아내. 드미트리의 어머니,person,family,Adelaïda Ivanovna Miüsov;Adelaïda Ivanovna;Adelaïda,,표도르의 첫 아내이자 드미트리의 어머니
+sofya,Sofya Ivanovna,소피야 이바노브나,표도르의 둘째 아내. 이반과 알료샤의 어머니,person,family,Sofya Ivanovna;Sofya,,표도르의 둘째 아내이자 이반과 알료샤의 어머니
+lizaveta,Stinking Lizaveta,리자베타 스메르댜시차야,스메르댜코프를 낳고 죽은 떠돌이 여인,person,household,"Lizaveta Smerdyastchaya;Lizaveta@3,8,9,11,12",,스메르댜코프의 어머니. 2권 3장의 Lizaveta는 다른 사람(아기)이라 뺐다
+grushenka,Grushenka,그루셴카,표도르와 드미트리가 함께 사랑한 여인,person,grushenka,Agrafena Alexandrovna;Grushenka;Grusha;Agrafena;Madame Svyetlov;Svyetlov;Pani Agrippina;Agrippina,,
+katerina,Katerina Ivanovna,카테리나 이바노브나,드미트리의 약혼녀. 이반과도 얽힌다,person,katerina,Katerina Ivanovna;Katya;Katenka;Katerina@11,,10권의 Katerina는 다른 사람(하녀)이라 뺐다
+hohlakov,Madame Hohlakov,호흘라코바 부인,부유한 미망인. 리자의 어머니,person,hohlakov,Madame Hohlakov;Hohlakov,,
+lise,Lise,리자,호흘라코바 부인의 딸. 알료샤와 결혼을 약속한다,person,hohlakov,Lise,,
+fenya,Fenya,페냐,그루셴카의 하녀,person,grushenka,Fedosya Markovna;Fenya,,그루셴카의 하녀
+marya_k,Marya Kondratyevna,마리야 콘드라티예브나,표도르 집 이웃의 딸. 스메르댜코프와 가깝다,person,household,Marya Kondratyevna,,
+agafya_i,Agafya Ivanovna,아가피야 이바노브나,카테리나의 이복 언니,person,katerina,"Agafya Ivanovna;Agafya@3,4",,카테리나의 언니
+yulia,Yulia,율리야,호흘라코바 부인의 하녀,person,hohlakov,Yulia,,호흘라코바 부인의 하녀
+zossima,Father Zossima,조시마 장로,수도원의 장로. 알료샤의 스승,person,monastery,Father Zossima;the elder Zossima;elder Zossima;Zossima,"the elder@1.5,2,3.11,4,5.3,6,7,8.1;his elder@3.11,6,7,11.2;the dead elder",
+paissy,Father Païssy,파이시 신부,수도원의 학식 있는 수도 사제,person,monastery,Father Païssy;Païssy,,
+ferapont,Father Ferapont,페라폰트 신부,조시마에 맞서는 금욕 수도사,person,monastery,Father Ferapont;Ferapont,,
+iosif,Father Iosif,이오시프 신부,수도원의 사서 수도 사제,person,monastery,Father Iosif;Iosif,,
+rakitin,Rakitin,라키틴,출세를 노리는 신학생,person,monastery,"Mihail Osipovitch;Rakitin;Misha@2,7",,8권의 Misha는 페르호틴의 심부름꾼
+superior,Father Superior,수도원장,수도원장,person,monastery,The Father Superior;Father Superior,the Superior,
+porfiry,Porfiry,포르피리,조시마의 시중을 드는 수련 수사,person,monastery,Porfiry,,
+obdorsk,Monk from Obdorsk,옵도르스크에서 온 수도사,북쪽 옵도르스크의 작은 수도원에서 온 손님 수도사,person,monastery,,monk from Obdorsk;guest from Obdorsk,이름 없이 불리는 인물
+miusov,Miüsov,미우소프,드미트리의 외가 쪽 친척인 자유주의 지주,person,town,Pyotr Alexandrovitch Miüsov;Pyotr Alexandrovitch;Miüsov,,
+kalganov,Kalganov,칼가노프,미우소프의 젊은 친척. 모크로예 술자리에 함께 있다,person,mokroe,Pyotr Fomitch Kalganov;Pyotr Fomitch;Kalganov,,
+maximov,Maximov,막시모프,몰락한 늙은 지주,person,mokroe,Maximov;Maximushka,,
+markel,Markel,마르켈,조시마의 회상에 나오는 형. 열일곱에 죽는다,embedded,zossima-tale,Markel,,조시마의 회상 속 형
+afanasy,Afanasy,아파나시,조시마의 회상에 나오는 당번병,embedded,zossima-tale,Afanasy Pavlovitch;Afanasy,,조시마의 회상 속 당번병
+visitor6,Mysterious visitor (Mihail),신비한 방문자,"조시마의 회상에 나오는, 옛 살인을 고백하는 방문자",embedded,zossima-tale,Mihail@6.2,mysterious visitor,조시마의 회상 속 인물
+anfim,Father Anfim,안핌 신부,조시마와 함께 탁발을 다녔던 수도사,embedded,zossima-tale,Father Anfim;Anfim,,
+perhotin,Perhotin,페르호틴,젊은 관리. 드미트리의 권총을 맡아 두었던 사람,person,town,Pyotr Ilyitch Perhotin;Pyotr Ilyitch;Perhotin,,
+samsonov,Samsonov,삼소노프,그루셴카를 돌봐 온 늙은 상인,person,grushenka,Kuzma Kuzmitch;Kuzma Samsonov;Samsonov,"the old man@7.3,8.1",
+lyagavy,Lyagavy (Gorstkin),랴가비(고르스트킨),숲을 사려는 장사꾼. 드미트리가 찾아간다,person,town,Lyagavy;Gorstkin,,
+trifon,Trifon Borissovitch,트리폰 보리소비치,모크로예의 여관 주인,person,mokroe,Trifon Borissovitch,,모크로예 여관 주인. 10권의 Trifon은 다른 사람
+mussyalovitch,Pan Mussyalovitch,무샬로비치,그루셴카의 옛 연인인 폴란드인,person,mokroe,Pan Mussyalovitch;Mussyalovitch,the Pole on the sofa;the little Pole;the Pole with the pipe;the Poles,그루셴카의 옛 연인
+vrublevsky,Pan Vrublevsky,브루블레프스키,무샬로비치와 함께 온 폴란드인,person,mokroe,Pan Vrublevsky;Vrublevsky,the tall Pole;the Poles,
+andrey,Andrey,안드레이,드미트리를 모크로예로 태워 간 마부,person,mokroe,Andrey,,마부
+timofey,Timofey,티모페이,그루셴카를 모크로예로 태워 간 마부,person,mokroe,Timofey,,마부
+misha_boy,Misha (Perhotin's boy),미샤(심부름꾼),페르호틴의 심부름꾼 소년,person,town,Misha@8,,
+herzenstube,Doctor Herzenstube,헤르첸슈투베 의사,읍내의 늙은 의사,person,town,Doctor Herzenstube;Herzenstube,,
+varvinsky,Varvinsky,바르빈스키 의사,읍내의 젊은 의사,person,court,Varvinsky,,
+moscow_doctor,Moscow doctor,모스크바에서 온 의사,카테리나가 모스크바에서 불러온 이름난 의사,person,court,,"the Moscow doctor;the famous doctor;the doctor@10.5,10.6,10.7",이름 없이 불리는 인물
+yefim,Yefim Petrovitch,예핌 페트로비치,이반과 알료샤를 맡아 기른 후견인,person,family,Yefim Petrovitch Polenov;Yefim Petrovitch;Polenov,,이반과 알료샤를 맡아 기른 사람
+ippolit,Ippolit Kirillovitch,이폴리트 키릴로비치(검사),검사. 재판에서 논고를 한다,person,court,Ippolit Kirillovitch;Ippolit,the prosecutor;the deputy prosecutor,
+nelyudov,Nikolay Parfenovitch,니콜라이 파르페노비치(예심판사),예심 판사,person,court,Nikolay Parfenovitch Nelyudov;Nikolay Parfenovitch;Nelyudov,the investigating lawyer,
+makarov,Mihail Makarovitch,미하일 마카로비치(경찰서장),경찰서장,person,court,Mihail Makarovitch Makarov;Mihail Makarovitch,the police captain;the captain of police;the captain of the police,
+fetyukovitch,Fetyukovitch,페튜코비치(변호사),페테르부르크에서 온 이름난 변호사,person,court,Fetyukovitch,the counsel for the defense;counsel for the defense,
+president,President of the court,재판장,재판장,person,court,,the President,이름 없이 불리는 인물
+mavriky,Mavriky Mavrikyevitch,마브리키 마브리키예비치,드미트리를 호송하는 경찰관,person,court,Mavriky Mavrikyevitch;Mavriky,,
+kolya,Kolya Krassotkin,콜랴 크라소트킨,열세 살 소년. 소년들의 우두머리,person,boys,Nikolay Ivanovitch Krassotkin;Nikolay Krassotkin;Kolya Krassotkin;Kolya;Krassotkin,,
+kolya_mother,Madame Krassotkin,크라소트키나 부인,콜랴의 어머니,person,boys,Madame Krassotkin;Anna Fyodorovna,,
+ilusha,Ilusha,일류샤,스네기료프 대위의 아들. 병으로 죽는다,person,snegiryov,Ilusha,,
+snegiryov,Captain Snegiryov,스네기료프 대위,가난한 퇴역 대위. 일류샤의 아버지,person,snegiryov,Captain Snegiryov;Nikolay Ilyitch Snegiryov;Nikolay Ilyitch;Snegiryov,"the captain@4.6,4.7,8.5,10,12.2,13",
+nina,Nina,니나,스네기료프의 딸. 몸이 불편하다,person,snegiryov,Nina,,
+varvara,Varvara,바르바라,스네기료프의 딸. 페테르부르크에서 공부한다,person,snegiryov,"Varvara@4,10",,
+arina,Arina Petrovna,아리나 페트로브나,스네기료프의 아내,person,snegiryov,Arina Petrovna,,스네기료프의 아내
+smurov,Smurov,스무로프,콜랴를 따르는 소년,person,boys,Smurov,,
+kartashov,Kartashov,카르타쇼프,소년들 가운데 하나,person,boys,Kartashov,,
+perezvon,Perezvon (Zhutchka),페레즈본(주치카),콜랴의 개. 일류샤가 찾던 주치카다,animal,boys,Perezvon;Zhutchka,,개
+dardanelov,Dardanelov,다르다넬로프,콜랴의 학교 교사,person,boys,Dardanelov,,교사
+agafya_s,Agafya (servant),아가피야(하녀),크라소트킨 집의 하녀,person,boys,Agafya@10,,크라소트킨 집 하녀
+kostya,Kostya,코스챠,크라소트킨 집에 세 든 의사 부인의 아이,person,boys,Kostya,,
+nastya,Nastya,나스챠,크라소트킨 집에 세 든 의사 부인의 아이,person,boys,Nastya,,
+inquisitor,Grand Inquisitor,대심문관,이반의 서사시에 나오는 세비야의 늙은 추기경,embedded,poem,the Grand Inquisitor;The Grand Inquisitor;Grand Inquisitor;Inquisitor,the cardinal@5.5;the old man@5.5,이반의 서사시 속 인물
+christ,Christ,그리스도,이반의 서사시에서 세비야에 나타나는 죄수. 끝까지 말이 없다,embedded,poem,Jesus Christ;Christ;Jesus,Prisoner@5.5,서사시에서는 이름 없이 대문자 대명사로만 불린다
+devil,The devil (Ivan's visitor),악마(이반의 방문객),이반의 환각 속에 나타나는 신사 차림의 방문객,embedded,poem,,"the devil@11.9,11.10;the visitor@11.9;the gentleman@11.9",이반의 환각
+richard,Richard,리샤르,이반이 들려주는 일화 속의 사형수,embedded,poem,Richard,,이반이 들려주는 일화 속 인물
