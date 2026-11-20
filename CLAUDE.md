@@ -82,16 +82,25 @@ mentions from 04; in the paragraph network 64 characters, 343 edges and four com
 - The novel's text uses em dashes and curly quotes. Match those characters, not their ASCII
   look-alikes, when searching it.
 - NLTK 3.10 refuses to download its data through a proxy. `NLTK_ALLOW_PROXIED_URLOPEN=1` allows it.
+- A pinned version can install and still fail to import on this Mac. scipy 1.15.3 did: its
+  macosx_14_0 wheel does not load on macOS 27, which is why scipy is pinned at 1.16.3. After
+  changing a pin, import the package before trusting the environment.
 
 ## Rules
 
 Results
 
-- Same input, same output. Rerunning 04 to 07 must reproduce the files byte for byte on one
-  machine, and everything except node positions must match across machines too (positions, and
-  so the page and the figure, may differ by under a pixel). To keep that: give every sort an
-  explicit tie order (`kind="stable"` or more sort keys), insert nodes in sorted order, use
-  `zlib.crc32` rather than `hash()`, fix seeds, round floats when writing.
+- Same input, same output. Rerunning 04 to 07 must reproduce the files byte for byte on this
+  machine, and the files written by 04 and 05 must match byte for byte on any other machine
+  too. To keep that: give every sort an explicit tie order (`kind="stable"` or more sort keys),
+  insert nodes in sorted order, use `zlib.crc32` rather than `hash()`, fix seeds, round floats
+  when writing.
+- Node positions are the exception, by decision. `layout.csv` and what is built from it
+  (`web_data.json`, `web/index.html`, the PNG figure) come out differently on other machines
+  and under other scipy builds, and that is accepted: positions are only the arrangement the
+  page opens with, and the page is meant to let nodes settle and be dragged in the browser. Do
+  not spend effort on making positions match across machines, and do not check them against a
+  reference.
 - Every number in a document comes from a file under `results/`. If a rerun moves a number,
   update the document in the same task and name the change in your report.
 - Report what comes out. Do not adjust code or the alias table to make a number match an

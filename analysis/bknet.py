@@ -242,10 +242,13 @@ def cooccurrence_edges(mentions: pd.DataFrame, unit: str = "sentence", min_menti
 
 
 def build_graph(edges: pd.DataFrame, threshold: int = 0) -> nx.Graph:
+    """엣지 표로 그래프를 만든다. 노드는 id 순, 엣지는 (횟수 큰 순, source, target) 순으로 넣는다.
+    Louvain 과 배치는 넣은 순서에 따라 결과가 달라지므로 순서를 표의 행 순서에 맡기지 않는다."""
+    keep = edges[edges.value > threshold].sort_values(["value", "source", "target"], ascending=[False, True, True])
     g = nx.Graph()
-    for r in edges.itertuples(index=False):
-        if r.value > threshold:
-            g.add_edge(r.source, r.target, weight=int(r.value), distance=1.0 / r.value)
+    g.add_nodes_from(sorted(set(keep.source) | set(keep.target)))
+    for r in keep.itertuples(index=False):
+        g.add_edge(r.source, r.target, weight=int(r.value), distance=1.0 / r.value)
     return g
 
 

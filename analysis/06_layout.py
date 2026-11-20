@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """06_layout.py : 네트워크 그림의 노드 자리를 정하고 정지 그림을 그린다
 
-문단 단위 네트워크에 ForceAtlas2 를 돌려 자리를 잡고, 이름표가 겹치지 않게 조금씩 밀어낸다.
+문단 단위 네트워크의 묶음(커뮤니티)마다 원을 하나 잡고 그 안에서 Kamada-Kawai 로 자리를 정한 뒤,
+이름표가 겹치지 않게 조금씩 밀어낸다.
 자리는 results/network/layout.csv 에 저장해 웹 페이지와 그림이 같은 배치를 쓴다.
 단위(문장/문단/장)나 권을 바꿔도 노드는 제자리에 있어야 변화가 눈에 들어오기 때문이다.
 """
@@ -235,7 +236,7 @@ def main():
     loose = [v for v in nodes.index if v not in pos]
     tray = []
     for v in loose:
-        cand = E[((E.source == v) & E.target.isin(pos)) | ((E.target == v) & E.source.isin(pos))].sort_values("value", ascending=False)
+        cand = E[((E.source == v) & E.target.isin(pos)) | ((E.target == v) & E.source.isin(pos))].sort_values(["value", "source", "target"], ascending=[False, True, True])
         if len(cand):
             r = cand.iloc[0]
             u = r.target if r.source == v else r.source
@@ -264,7 +265,7 @@ def main():
     fig, ax = plt.subplots(figsize=(14, 10), dpi=150)
     fig.patch.set_facecolor("#fcfcfb"); ax.set_facecolor("#fcfcfb")
     wmax = E.value.max()
-    for r in E[E.value >= 2].sort_values("value").itertuples(index=False):
+    for r in E[E.value >= 2].sort_values(["value", "source", "target"]).itertuples(index=False):
         (x1, y1), (x2, y2) = pos[r.source], pos[r.target]
         same = part.get(r.source) == part.get(r.target)
         col = SLOT_COLOR[slot_of[part[r.source]]] if same and r.source in part else "#898781"

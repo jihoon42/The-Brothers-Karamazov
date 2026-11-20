@@ -25,18 +25,18 @@
    "modularity": 0.2957,
    "community_stability": {
     "n_runs": 20,
-    "modularity_min": 0.29104628254772374,
-    "modularity_max": 0.29572519676633574,
-    "nmi_to_best_mean": 0.9563700758252445,
-    "nmi_to_best_min": 0.8726755784551001,
+    "modularity_min": 0.291046,
+    "modularity_max": 0.295725,
+    "nmi_to_best_mean": 0.954659,
+    "nmi_to_best_min": 0.872676,
     "n_communities": [
      [
       4,
-      16
+      17
      ],
      [
       5,
-      4
+      3
      ]
     ]
    },
@@ -135,12 +135,12 @@
      67
     ],
     [
-     "ivan",
+     "alyosha",
      "mitya",
      58
     ],
     [
-     "alyosha",
+     "ivan",
      "mitya",
      58
     ],
@@ -165,13 +165,13 @@
      37
     ],
     [
-     "fyodor",
-     "mitya",
+     "alyosha",
+     "zossima",
      31
     ],
     [
-     "alyosha",
-     "zossima",
+     "fyodor",
+     "mitya",
      31
     ],
     [
@@ -186,22 +186,22 @@
     ],
     [
      "alyosha",
+     "kolya",
+     29
+    ],
+    [
+     "alyosha",
      "rakitin",
      29
     ],
     [
      "alyosha",
-     "kolya",
-     29
+     "lise",
+     28
     ],
     [
      "mussyalovitch",
      "vrublevsky",
-     28
-    ],
-    [
-     "alyosha",
-     "lise",
      28
     ],
     [
@@ -277,12 +277,16 @@
       15.0
      ],
      [
+      "smerdyakov",
+      12.0
+     ],
+     [
       "zossima",
       12.0
      ],
      [
-      "smerdyakov",
-      12.0
+      "hohlakov",
+      10.0
      ],
      [
       "katerina",
@@ -293,11 +297,7 @@
       10.0
      ],
      [
-      "hohlakov",
-      10.0
-     ],
-     [
-      "kolya",
+      "grigory",
       8.0
      ],
      [
@@ -305,7 +305,7 @@
       8.0
      ],
      [
-      "grigory",
+      "kolya",
       8.0
      ],
      [
@@ -471,19 +471,19 @@
       0.046
      ],
      [
-      "lise",
-      0.0385
-     ],
-     [
       "ferapont",
       0.0385
      ],
      [
-      "miusov",
+      "grigory",
       0.0385
      ],
      [
-      "grigory",
+      "lise",
+      0.0385
+     ],
+     [
+      "miusov",
       0.0385
      ],
      [
@@ -512,10 +512,10 @@
    "modularity": 0.2595,
    "community_stability": {
     "n_runs": 20,
-    "modularity_min": 0.25727270965366206,
-    "modularity_max": 0.25946478701057457,
-    "nmi_to_best_mean": 0.9889500748635713,
-    "nmi_to_best_min": 0.8950257112039292,
+    "modularity_min": 0.257273,
+    "modularity_max": 0.259465,
+    "nmi_to_best_mean": 0.983425,
+    "nmi_to_best_min": 0.895026,
     "n_communities": [
      [
       4,
@@ -719,13 +719,13 @@
      45
     ],
     [
+     "alyosha",
      "fyodor",
-     "grigory",
      44
     ],
     [
-     "alyosha",
      "fyodor",
+     "grigory",
      44
     ],
     [
@@ -783,11 +783,11 @@
       19.0
      ],
      [
-      "makarov",
+      "grigory",
       18.0
      ],
      [
-      "grigory",
+      "makarov",
       18.0
      ],
      [
@@ -799,11 +799,11 @@
       17.0
      ],
      [
-      "perhotin",
+      "kalganov",
       15.0
      ],
      [
-      "kalganov",
+      "perhotin",
       15.0
      ]
     ],
@@ -849,11 +849,11 @@
       200.0
      ],
      [
-      "zossima",
+      "kolya",
       192.0
      ],
      [
-      "kolya",
+      "zossima",
       192.0
      ],
      [
@@ -981,15 +981,15 @@
       0.0143
      ],
      [
-      "ferapont",
-      0.0
-     ],
-     [
-      "iosif",
-      0.0
-     ],
-     [
       "adelaida",
+      0.0
+     ],
+     [
+      "agafya_i",
+      0.0
+     ],
+     [
+      "agafya_s",
       0.0
      ]
     ]
@@ -1006,14 +1006,18 @@
    "modularity": 0.1944,
    "community_stability": {
     "n_runs": 20,
-    "modularity_min": 0.18923141469996496,
-    "modularity_max": 0.19440041357427992,
-    "nmi_to_best_mean": 0.9763660757537937,
-    "nmi_to_best_min": 0.8059578076408718,
+    "modularity_min": 0.185404,
+    "modularity_max": 0.1944,
+    "nmi_to_best_mean": 0.941714,
+    "nmi_to_best_min": 0.745399,
     "n_communities": [
      [
+      3,
+      1
+     ],
+     [
       4,
-      20
+      19
      ]
     ]
    },
@@ -1111,13 +1115,13 @@
      44
     ],
     [
-     "fyodor",
-     "mitya",
+     "alyosha",
+     "ivan",
      39
     ],
     [
-     "alyosha",
-     "ivan",
+     "fyodor",
+     "mitya",
      39
     ],
     [
@@ -1131,13 +1135,13 @@
      36
     ],
     [
+     "alyosha",
      "katerina",
-     "mitya",
      32
     ],
     [
-     "alyosha",
      "katerina",
+     "mitya",
      32
     ],
     [
@@ -1166,22 +1170,22 @@
      23
     ],
     [
-     "ivan",
-     "katerina",
-     23
-    ],
-    [
      "fyodor",
      "grushenka",
      23
     ],
     [
-     "ippolit",
+     "ivan",
+     "katerina",
+     23
+    ],
+    [
+     "grigory",
      "mitya",
      22
     ],
     [
-     "grigory",
+     "ippolit",
      "mitya",
      22
     ],
@@ -1191,13 +1195,13 @@
      21
     ],
     [
-     "ivan",
-     "smerdyakov",
+     "fyodor",
+     "grigory",
      20
     ],
     [
-     "fyodor",
-     "grigory",
+     "ivan",
+     "smerdyakov",
      20
     ],
     [
@@ -1216,12 +1220,12 @@
      18
     ],
     [
-     "grushenka",
+     "grigory",
      "smerdyakov",
      17
     ],
     [
-     "grigory",
+     "grushenka",
      "smerdyakov",
      17
     ],
@@ -1274,11 +1278,11 @@
       22.0
      ],
      [
-      "smerdyakov",
+      "maximov",
       20.0
      ],
      [
-      "maximov",
+      "smerdyakov",
       20.0
      ],
      [
@@ -1290,7 +1294,7 @@
       17.0
      ],
      [
-      "trifon",
+      "kalganov",
       16.0
      ]
     ],
@@ -1308,11 +1312,11 @@
       299.0
      ],
      [
-      "ivan",
+      "grushenka",
       269.0
      ],
      [
-      "grushenka",
+      "ivan",
       269.0
      ],
      [
@@ -1468,11 +1472,11 @@
       0.0002
      ],
      [
-      "mussyalovitch",
+      "adelaida",
       0.0
      ],
      [
-      "superior",
+      "agafya_i",
       0.0
      ],
      [

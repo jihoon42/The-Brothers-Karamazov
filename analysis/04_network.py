@@ -49,8 +49,8 @@ def main():
     nodes["n_sentences"] = M.groupby("char_id").sid.nunique()
     nodes["n_paragraphs"] = M.groupby("char_id").pid.nunique()
     nodes["n_chapters"] = M.groupby("char_id").chap_seq.nunique()
-    first = M.sort_values("pid").groupby("char_id").first()
-    last = M.sort_values("pid").groupby("char_id").last()
+    first = M.sort_values("pid", kind="stable").groupby("char_id").first()
+    last = M.sort_values("pid", kind="stable").groupby("char_id").last()
     nodes["first_chapter"] = first.book.astype(str) + "." + first.chapter.astype(str)
     nodes["last_chapter"] = last.book.astype(str) + "." + last.chapter.astype(str)
     for col in ("mentions", "mentions_name", "mentions_role", "n_sentences", "n_paragraphs", "n_chapters"):
@@ -62,10 +62,11 @@ def main():
     # ---- 단위별 네트워크
     graphs, cens, parts = {}, {}, {}
     for unit, kw in UNITS.items():
-        E = bknet.cooccurrence_edges(M, unit, **kw).sort_values("value", ascending=False)
+        E = bknet.cooccurrence_edges(M, unit, **kw).sort_values(["value", "source", "target"], ascending=[False, True, True])
         E.to_csv(OUT / f"edges_{unit}.csv", index=False)
         G = bknet.build_graph(E, threshold=MIN_WEIGHT - 1)
-        giant = G.subgraph(max(nx.connected_components(G), key=len)).copy()
+        comp = max(nx.connected_components(G), key=len)
+        giant = bknet.build_graph(E[E.source.isin(comp) & E.target.isin(comp)], threshold=MIN_WEIGHT - 1)
         part, mod, stab = bknet.communities(giant)
         cen = bknet.centralities(giant)
         graphs[unit], cens[unit], parts[unit] = giant, cen, part
@@ -81,9 +82,11 @@ def main():
             pairs_any=int(len(E)), units_with_two_or_more=units_multi,
             nodes=G.number_of_nodes(), edges=G.number_of_edges(), giant_nodes=giant.number_of_nodes(),
             density=round(nx.density(giant), 4), avg_clustering=round(nx.average_clustering(giant), 4),
-            modularity=round(mod, 4), community_stability=stab, communities=comm_list,
+            modularity=round(mod, 4),
+            community_stability={k: round(v, 6) if isinstance(v, float) else v for k, v in stab.items()},
+            communities=comm_list,
             top_edges=[(a, b, int(v)) for a, b, v in E.head(25).itertuples(index=False)],
-            top={col: [(v, round(float(x), 4)) for v, x in cen[col].sort_values(ascending=False).head(15).items()]
+            top={col: [(v, round(float(x), 4)) for v, x in cen[col].sort_values(ascending=False, kind="stable").head(15).items()]
                  for col in ("degree", "strength", "pagerank", "betweenness")},
         )
         suffix = "" if unit == MAIN_UNIT else f"_{unit}"
@@ -148,8 +151,8 @@ def main():
             distinct_persons_covered=len(persons_split),
         )
 
-    nodes = nodes.sort_values("mentions", ascending=False)
-    nodes.to_csv(OUT / "nodes.csv")
+    nodes = nodes.sort_values("mentions", ascending=False, kind="stable")
+    nodes.round(10).to_csv(OUT / "nodes.csv")
     (OUT / "summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=1), encoding="utf-8")
 
     name = {c.id: c.name for c in C}
