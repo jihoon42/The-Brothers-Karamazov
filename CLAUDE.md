@@ -43,6 +43,7 @@ is in.
 
 | Path | What it is |
 |---|---|
+| `README.md` | Overview for readers, in Korean, with the link to the page. Written in the chat. Do not edit. |
 | `data/raw/pg28054-0.txt` | Source text as downloaded. Never edit. |
 | `data/karamazov_garnett.txt`, `data/paragraphs.csv`, `data/chapters.csv` | Clean text and its tables, written by 01 |
 | `data/characters.csv` | Alias table for 70 characters, made by hand. The only hand-edited input. |
